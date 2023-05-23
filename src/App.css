@@ -1,0 +1,23 @@
+/* CSS для заголовка (header) */
+.header {
+  padding: 20px;
+}
+
+/* CSS для контента (content) */
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.dw-chart-footer.svelte-crzbxb.svelte-crzbxb {
+  display: none !important;
+}
+@media screen and (max-width: 600px) {
+  /* Медиа-запрос для мобильных устройств с шириной экрана до 600px */
+  .content {
+    padding: 10px;
+  }
+}

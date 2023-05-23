@@ -1,0 +1,9 @@
+.header_content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header_buttons{
+    display: flex;
+    flex-direction: row;
+}
