@@ -1,0 +1,9 @@
+.step_first_text_plus_select {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.step_first_checkbox {
+  margin-top: 26px;
+}

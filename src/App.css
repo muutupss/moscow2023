@@ -8,8 +8,8 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  display: flex;
-  justify-content: center;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border-radius: 8px;
 }
 
 .dw-chart-footer.svelte-crzbxb.svelte-crzbxb {
