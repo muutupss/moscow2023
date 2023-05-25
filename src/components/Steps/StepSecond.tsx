@@ -172,11 +172,11 @@ const StepSecond = () => {
             <Col span={10}>
               <div className="step_second_text_input_plus_button">
                 <div className="step_second_text_plus_select">
-                  <Text strong>Цена</Text>
+                  <Text strong>Площадь м2</Text>
                   <Input
                     onChange={handleChangeSpecificObjectsCost}
                     maxLength={16}
-                    placeholder="3 млн"
+                    placeholder="3 м2"
                     value={valueSpecificObjectsCost}
                   />
                 </div>
