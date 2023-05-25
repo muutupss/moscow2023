@@ -1,0 +1,8 @@
+.short_report_main_text_title__magin {
+  text-align: center
+}
+
+.short_report_main_sum{
+  display: flex;
+  justify-content: space-between;
+}

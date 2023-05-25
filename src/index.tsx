@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import MainPage from './routes/MainPage';
 import LoginPage from './routes/LoginPage';
+import Registration from './routes/Registration';
+import ShortReportPage from './routes/ShortReportPage';
 import ErrorPage from './error-page';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Registration from './routes/Registration';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
   {
     path: '/registration',
     element: <Registration />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/shortreport',
+    element: <ShortReportPage />,
     errorElement: <ErrorPage />,
   },
 ]);
