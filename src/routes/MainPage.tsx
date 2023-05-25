@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
-import Header from './components/Header/Header';
-import Content from './components/Content/Content';
+import './MainPage.css';
+import Header from '../components/Header/Header';
+import Content from '../components/Content/Content';
 
-function App() {
+function MainPage() {
   return (
     <div>
       <div className="header">
@@ -16,4 +16,4 @@ function App() {
   );
 }
 
-export default App;
+export default MainPage;
