@@ -1,9 +1,9 @@
 import React from 'react';
-import './Registration.css';
+import './RegistrationPage.css';
 import Header from '../components/Header/Header';
 import RegistrationMain from '../components/Registration/RegistrationMain';
 
-function Registration() {
+function RegistrationPage() {
   return (
     <div>
       <div className="registration_page_header">
@@ -16,4 +16,4 @@ function Registration() {
   );
 }
 
-export default Registration;
+export default RegistrationPage;

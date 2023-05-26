@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import MainPage from './routes/MainPage';
 import LoginPage from './routes/LoginPage';
-import Registration from './routes/Registration';
+import RegistrationPage from './routes/RegistrationPage';
 import ShortReportPage from './routes/ShortReportPage';
 import CabinetPage from './routes/CabinetPage';
+import AdminPage from './routes/AdminPage';
 
 import ErrorPage from './error-page';
 import 'antd/dist/reset.css';
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/registration',
-    element: <Registration />,
+    element: <RegistrationPage />,
     errorElement: <ErrorPage />,
   },
   {
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
   {
     path: '/cabinet',
     element: <CabinetPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/admin',
+    element: <AdminPage />,
     errorElement: <ErrorPage />,
   },
 ]);
