@@ -5,6 +5,7 @@ import StepSecond from '../Steps/StepSecond';
 import StepThird from '../Steps/StepThird';
 
 import './Content.css';
+import { useNavigate } from 'react-router-dom';
 
 const steps = [
   {
@@ -20,6 +21,7 @@ const steps = [
 
 const Content = () => {
   const [current, setCurrent] = useState(0);
+  const navigate = useNavigate();
   const next = () => {
     setCurrent(current + 1);
   };
@@ -28,6 +30,11 @@ const Content = () => {
     setCurrent(current - 1);
   };
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
+
+  const handleDoneButton = () => {
+    message.info('Рассчитываем ваши затраты...');
+    navigate('/shortreport');
+  };
 
   return (
     <div>
@@ -44,10 +51,7 @@ const Content = () => {
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button
-            type="primary"
-            onClick={() => message.success('Processing complete!')}
-          >
+          <Button type="primary" onClick={handleDoneButton}>
             Done
           </Button>
         )}

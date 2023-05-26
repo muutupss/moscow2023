@@ -13,3 +13,7 @@
 .step_second_button_add__margin {
   margin-top: 21px;
 }
+
+.dw-chart-footer.svelte-crzbxb.svelte-crzbxb {
+  display: none !important;
+}

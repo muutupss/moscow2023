@@ -13,9 +13,6 @@
   margin-bottom: 40px;
 }
 
-.dw-chart-footer.svelte-crzbxb.svelte-crzbxb {
-  display: none !important;
-}
 @media screen and (max-width: 600px) {
   /* Медиа-запрос для мобильных устройств с шириной экрана до 600px */
   .content {
