@@ -3,6 +3,7 @@ import logo from '../../assets/img/logo.jpg';
 import { Button, Space } from 'antd';
 import './Header.css';
 import { useLocation, useNavigate, NavLink } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons';
 
 const Header = () => {
   let location = useLocation();
@@ -16,8 +17,13 @@ const Header = () => {
     navigate('/login');
   };
 
+  const handleClickAppFormButton = () => {
+    navigate('/');
+  };
+
   const handleLoginButton = () => {
-    return location.pathname !== '/login' ? (
+    return location.pathname !== '/login' &&
+      location.pathname !== '/cabinet' ? (
       <Button danger onClick={handleClickLoginButton}>
         Войти
       </Button>
@@ -27,10 +33,31 @@ const Header = () => {
   };
 
   const handleRegistationButton = () => {
-    return location.pathname !== '/registration' ? (
+    return location.pathname !== '/registration' &&
+      location.pathname !== '/cabinet' ? (
       <Button type="primary" danger onClick={handleClickRegistationButton}>
         Регистрация
       </Button>
+    ) : (
+      <></>
+    );
+  };
+
+  const handleAppFormButton = () => {
+    return location.pathname === '/cabinet' ? (
+      <div className="header_calculate__margin">
+        <Button type="primary" danger onClick={handleClickAppFormButton}>
+          Рассчитать вложения
+        </Button>
+      </div>
+    ) : (
+      <></>
+    );
+  };
+
+  const handleProfileIcon = () => {
+    return location.pathname === '/cabinet' ? (
+      <UserOutlined style={{ fontSize: '32px', color: 'red' }} />
     ) : (
       <></>
     );
@@ -47,6 +74,8 @@ const Header = () => {
         <Space wrap>
           {handleRegistationButton()}
           {handleLoginButton()}
+          {handleAppFormButton()}
+          {handleProfileIcon()}
         </Space>
       </div>
     </div>

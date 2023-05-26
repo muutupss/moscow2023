@@ -37,7 +37,7 @@ const options = {
   },
   series: [
     {
-      name: 'Brands',
+      name: 'Процент',
       colorByPoint: true,
       data: [
         {
