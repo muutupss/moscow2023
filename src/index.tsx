@@ -8,10 +8,18 @@ import ShortReportPage from './routes/ShortReportPage';
 import CabinetPage from './routes/CabinetPage';
 import AdminPage from './routes/AdminPage';
 
+import { StoreContext } from './hooks/use-store';
+import { stores } from './stores/stores';
+import { configure } from 'mobx';
+
 import ErrorPage from './error-page';
 import 'antd/dist/reset.css';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+configure({
+  enforceActions: 'always',
+});
 
 const router = createBrowserRouter([
   {
@@ -51,6 +59,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <StoreContext.Provider value={stores()}>
+      <RouterProvider router={router} />
+    </StoreContext.Provider>
   </React.StrictMode>,
 );
