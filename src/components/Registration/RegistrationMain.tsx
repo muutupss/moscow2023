@@ -1,11 +1,17 @@
 import React from 'react';
 import './RegistrationMain.css';
 import { Button, Col, Form, Input, Row, Typography } from 'antd';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../hooks/use-store';
 
 const { Text, Title } = Typography;
 
-function RegistrationMain() {
+const RegistrationMain = observer(() => {
+  const { sharedStore } = useStore();
+  const { postRegistrationInfo } = sharedStore;
+
   const onFinish = (values: any) => {
+    postRegistrationInfo(values);
     console.log('Success:', values);
   };
 
@@ -28,7 +34,7 @@ function RegistrationMain() {
       >
         <Text strong>Фамилия</Text>
         <Form.Item
-          name="LastName"
+          name="last_name"
           rules={[
             { required: true, message: 'Пожалуйста введите вашу Фамилию' },
           ]}
@@ -38,29 +44,30 @@ function RegistrationMain() {
 
         <Text strong>Имя</Text>
         <Form.Item
-          name="FirstName"
+          name="first_name"
           rules={[{ required: true, message: 'Пожалуйста введите ваше Имя' }]}
         >
           <Input />
         </Form.Item>
 
         <Text strong>Отчество</Text>
-        <Form.Item name="ThirdName">
+        <Form.Item name="middle_name">
           <Input />
         </Form.Item>
         <Row gutter={16}>
           <Col span={12}>
-            <Text strong>Адрес электронной почты</Text>
-            <Form.Item
-              name="Email"
-              rules={[
-                { required: true, message: 'Пожалуйста введите вашу Почту' },
-              ]}
-            >
+            <Text strong>Название организации</Text>
+            <Form.Item name="organization">
               <Input />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={6}>
+            <Text strong>Веб-сайт организации</Text>
+            <Form.Item name="site">
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={6}>
             <Text strong>ИНН</Text>
             <Form.Item
               name="INN"
@@ -73,34 +80,45 @@ function RegistrationMain() {
           </Col>
         </Row>
 
-        <Text strong>Веб-сайт организации</Text>
-        <Form.Item name="Site">
-          <Input />
-        </Form.Item>
-
         <Text strong>Отрасль ведения хозяйственной деятельности</Text>
-        <Form.Item name="Activity">
+        <Form.Item name="industry_id">
           <Input />
         </Form.Item>
 
         <Row gutter={16}>
           <Col span={12}>
             <Text strong>Страна</Text>
-            <Form.Item name="Country">
+            <Form.Item name="country">
               <Input />
             </Form.Item>
           </Col>
           <Col span={12}>
             <Text strong>Город</Text>
-            <Form.Item name="City">
+            <Form.Item name="city">
               <Input />
             </Form.Item>
           </Col>
         </Row>
 
         <Text strong>Должность</Text>
-        <Form.Item name="Post">
+        <Form.Item name="job">
           <Input />
+        </Form.Item>
+
+        <Text strong>Адрес электронной почты</Text>
+        <Form.Item
+          name="email"
+          rules={[{ required: true, message: 'Пожалуйста введите вашу Почту' }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Text strong>Password</Text>
+        <Form.Item
+          name="password"
+          rules={[{ required: true, message: 'Пожалуйста введите ваш Пароль' }]}
+        >
+          <Input.Password />
         </Form.Item>
 
         <Form.Item>
@@ -111,6 +129,6 @@ function RegistrationMain() {
       </Form>
     </>
   );
-}
+});
 
 export default RegistrationMain;
