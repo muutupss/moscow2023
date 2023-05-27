@@ -13,9 +13,8 @@ const listOfTypeOrganization = [
 
 const { Text } = Typography;
 
-const StepFirst = ({ industries }: any) => {
+const StepFirst = ({ industries, patents }: any) => {
   const [value, setValue] = useState('');
-  console.log('industries', JSON.stringify(industries));
 
   const onChange = (value: string) => {
     console.log(`selected ${value}`);
@@ -78,6 +77,26 @@ const StepFirst = ({ industries }: any) => {
               defaultValue="ИП"
               onChange={handleChangeTypeOrganization}
               options={listOfTypeOrganization}
+            />
+          </div>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={18}>
+          <div className="step_first_text_plus_select">
+            <Text strong>Патент</Text>
+            <Select
+              showSearch
+              placeholder="Начните печатать"
+              optionFilterProp="children"
+              onChange={onChange}
+              filterOption={(input, option) =>
+                (option?.label ?? '')
+                  // @ts-ignore
+                  .toLowerCase()
+                  .includes(input.toLowerCase())
+              }
+              options={patents.length !== 0 ? patents : []}
             />
           </div>
         </Col>

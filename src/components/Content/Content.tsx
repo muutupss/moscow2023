@@ -27,11 +27,24 @@ const Content = observer(() => {
   const navigate = useNavigate();
 
   const { sharedStore } = useStore();
-  const { getIndustries, industries } = sharedStore;
+  const {
+    getIndustries,
+    getPatents,
+    getDistricts,
+    industries,
+    patents,
+    districts,
+  } = sharedStore;
 
   useEffect(() => {
     if (industries.length === 0) {
       getIndustries();
+    }
+    if (patents.length === 0) {
+      getPatents();
+    }
+    if (districts.length === 0) {
+      getDistricts();
     }
   }, []);
 
@@ -53,8 +66,10 @@ const Content = observer(() => {
     <div>
       <Steps current={current} items={items} />
       <div className="content_main">
-        {current === 0 && <StepFirst industries={industries} />}
-        {current === 1 && <StepSecond />}
+        {current === 0 && (
+          <StepFirst industries={industries} patents={patents} />
+        )}
+        {current === 1 && <StepSecond districts={districts} />}
         {current === 2 && <StepThird />}
       </div>
       <div style={{ marginTop: 24 }}>

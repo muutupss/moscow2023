@@ -69,7 +69,7 @@ const data = [
   },
 ];
 
-const StepSecond = () => {
+const StepSecond = ({ districts }: any) => {
   const [valueAll, setValueAll] = useState('');
   const [valueObjects, setvalueObjects] = useState('');
   const [valueSpecificObjects, setvalueSpecificObjects] = useState('');
@@ -123,11 +123,17 @@ const StepSecond = () => {
               <div className="step_second_text_plus_select">
                 <Text strong>Где будем строить</Text>
                 <Select
-                  mode="multiple"
-                  allowClear
-                  placeholder="Выберите районы Москвы"
+                  showSearch
+                  placeholder="Начните печатать"
+                  optionFilterProp="children"
                   onChange={handleChangeSelectMoscowRegion}
-                  options={optionsMoscowRegion}
+                  filterOption={(input, option) =>
+                    (option?.label ?? '')
+                      // @ts-ignore
+                      .toLowerCase()
+                      .includes(input.toLowerCase())
+                  }
+                  options={districts.length !== 0 ? districts : []}
                 />
               </div>
             </Col>

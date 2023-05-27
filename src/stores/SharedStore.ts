@@ -4,6 +4,8 @@ import SharedStoreInfoAPI from './SharedStoreAPI'
 export default class SharedStore {
   API: any = {}
   industries: any = []
+  patents: any = []
+  districts: any = []
 
   constructor() {
     this.API = new SharedStoreInfoAPI()
@@ -46,6 +48,38 @@ export default class SharedStore {
       id: industriesValue.id,
       value: industriesValue.name,
       label: industriesValue.name
+    })
+    });
+    }).catch((error: any) => {
+      console.log(JSON.stringify(error))
+    })
+  }
+
+  getPatents = () => {
+    this.API.getPatents().then((patents: any) => {
+    console.log('patents', patents)
+    this.patents = patents?.patents.map((patentsValue: any) => {
+      return (
+      {
+      id: patentsValue.id,
+      value: patentsValue.name,
+      label: patentsValue.name
+    })
+    });
+    }).catch((error: any) => {
+      console.log(JSON.stringify(error))
+    })
+  }
+
+  getDistricts = () => {
+    this.API.getDistricts().then((districts: any) => {
+    console.log('districts', districts)
+    this.districts = districts?.districts.map((districtsValue: any) => {
+      return (
+      {
+      id: districtsValue.id,
+      value: districtsValue.name,
+      label: districtsValue.name
     })
     });
     }).catch((error: any) => {
