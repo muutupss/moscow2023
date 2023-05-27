@@ -68,8 +68,7 @@ const Content = observer(() => {
 
   const handleDoneButton = () => {
     message.info('Рассчитываем ваши затраты...');
-    postCalculator();
-    //navigate('/shortreport');
+    postCalculator().then(() => navigate('/shortreport'));
   };
 
   return (

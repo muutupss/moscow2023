@@ -25,6 +25,66 @@ export default class SharedStore {
     "calculation_id": null
   }
 
+  optionsForChart = {
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie',
+    },
+    title: {
+      text: '',
+      align: 'center',
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+    },
+    accessibility: {
+      point: {
+        valueSuffix: '%',
+      },
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+        },
+      },
+    },
+    series: [{
+      name: 'Процент',
+      colorByPoint: true,
+      data: [
+        {
+          name: 'Строительство',
+          y: 0,
+          sliced: true,
+          selected: true,
+        },
+        {
+          name: 'Зарплата',
+          y: 0,
+        },
+        {
+          name: 'Оборудование',
+          y: 0,
+        },
+        {
+          name: 'Налоги',
+          y: 0,
+        },
+      ],
+    },],
+  };
+
+  currentResultsTotal: any = {
+    "total_from": 0,
+    "total_to": 0
+  }
+
   constructor() {
     this.API = new SharedStoreInfoAPI()
     makeAutoObservable(this)
@@ -65,7 +125,7 @@ export default class SharedStore {
 
   postCalculator = () => {
     console.log(JSON.stringify(this.currentStepValues))
-    let mapCalculator = this.currentStepValues
+    let mapCalculator = {...this.currentStepValues}
     if (this.currentStepValues.industry_id) {
       mapCalculator.industry_id = this.industries.find((industry: any) => industry.value === mapCalculator.industry_id).id
     }
@@ -82,6 +142,16 @@ export default class SharedStore {
       mapCalculator.patent_id = this.patents.find((patent: any) => patent.value === mapCalculator.patent_id).id
     }
     console.log(JSON.stringify(mapCalculator))
+    return this.API.postCalculator(mapCalculator).then((result: any) => {
+      this.optionsForChart.series[0].data[0].y = (result.result.personal_to / result.result.total_to) * 100
+      this.optionsForChart.series[0].data[1].y = (result.result.estate_to / result.result.total_to) * 100
+      this.optionsForChart.series[0].data[2].y = (result.result.tax_to / result.result.total_to) * 100
+      this.optionsForChart.series[0].data[3].y = (result.result.service_to / result.result.total_to) * 100
+      this.currentResultsTotal.total_from = result.result.total_from
+      this.currentResultsTotal.total_to = result.result.total_to
+    }).catch((error: any) => {
+      console.log(JSON.stringify(error))
+    })
   }
 
   getLogin = (login: any) => {
