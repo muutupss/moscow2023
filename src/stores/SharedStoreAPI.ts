@@ -1,4 +1,4 @@
-const CURRENT_URL = 'http://188.72.108.129:8080'
+const CURRENT_URL = 'http://127.0.0.1:8080'
 
 export default class SharedStoreInfoAPI {
   SFapi: any = {}
