@@ -6,6 +6,7 @@ export default class SharedStore {
   industries: any = []
   patents: any = []
   districts: any = []
+  doesUserInSystem: boolean = false
 
   constructor() {
     this.API = new SharedStoreInfoAPI()
@@ -22,6 +23,7 @@ export default class SharedStore {
     this.API.postRegistrationInfo(mapRegistation)
     .then((user: any) => {
       localStorage.setItem('user', JSON.stringify(user));
+      this.doesUserInSystem = true;
       console.log(JSON.stringify(user))
     }
     ).catch((error: any) => {
@@ -32,11 +34,18 @@ export default class SharedStore {
   getLogin = (login: any) => {
     this.API.getLogin(login).then((user: any) => {
       localStorage.setItem('user', JSON.stringify(user));
+      this.doesUserInSystem = true;
       console.log(JSON.stringify(user))
     }
     ).catch((error: any) => {
       console.log(JSON.stringify(error))
     })
+  }
+
+  logout = () => {
+    // remove user from local storage to log user out
+    localStorage.removeItem('user');
+    this.doesUserInSystem = false;
   }
 
   getIndustries = () => {

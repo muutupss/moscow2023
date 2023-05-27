@@ -1,14 +1,32 @@
 import React from 'react';
 import logo from '../../assets/img/logo.jpg';
-import { Button, Space } from 'antd';
+import { Button, Dropdown, MenuProps, Space } from 'antd';
 import './Header.css';
 import { useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { observer } from 'mobx-react-lite';
+import { useStore } from '../../hooks/use-store';
+
+const items: MenuProps['items'] = [
+  {
+    key: '1',
+    label: 'Мои отчеты',
+  },
+  {
+    key: '2',
+    label: 'Мои данные',
+  },
+  {
+    key: '3',
+    label: 'Выйти',
+  },
+];
 
 const Header = observer(() => {
   let location = useLocation();
   const navigate = useNavigate();
+  const { sharedStore } = useStore();
+  const { logout } = sharedStore;
 
   const handleClickRegistationButton = () => {
     navigate('/registration');
@@ -20,6 +38,21 @@ const Header = observer(() => {
 
   const handleClickAppFormButton = () => {
     navigate('/');
+  };
+
+  const onClick: MenuProps['onClick'] = ({ key }) => {
+    switch (key) {
+      case '1':
+        navigate('/cabinet');
+        break;
+      case '2':
+        break;
+      case '3':
+        logout();
+        break;
+      default:
+        break;
+    }
   };
 
   const handleLoginButton = () => {
@@ -58,7 +91,9 @@ const Header = observer(() => {
 
   const handleProfileIcon = () => {
     return location.pathname === '/cabinet' ? (
-      <UserOutlined style={{ fontSize: '32px', color: 'red' }} />
+      <Dropdown menu={{ items, onClick }} placement="bottomLeft">
+        <UserOutlined style={{ fontSize: '32px', color: 'red' }} />
+      </Dropdown>
     ) : (
       <></>
     );

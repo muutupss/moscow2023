@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './LoginMain.css';
 import { Button, Form, Input, Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
+import { useNavigate } from 'react-router-dom';
 
 const { Text, Title } = Typography;
 
 const LoginMain = observer(() => {
   const { sharedStore } = useStore();
-  const { getLogin } = sharedStore;
+  const { getLogin, doesUserInSystem } = sharedStore;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (doesUserInSystem) {
+      navigate('/cabinet');
+    }
+  }, [doesUserInSystem]);
 
   const onFinish = (values: any) => {
     getLogin(values);

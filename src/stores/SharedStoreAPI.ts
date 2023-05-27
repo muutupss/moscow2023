@@ -23,7 +23,7 @@ export default class SharedStoreInfoAPI {
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(login)
   } as any;
-
+    console.log('login', login)
     return fetch(`${CURRENT_URL}/authorization`, requestOptions).then(this.handleResponse);
   }
 
@@ -53,11 +53,6 @@ export default class SharedStoreInfoAPI {
 
     return fetch(`${CURRENT_URL}/districts`, requestOptions).then(this.handleResponse);
   }
-
-  logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('user');
-}
 
   handleResponse(response : any) {
     return response.text().then((text: any) => {

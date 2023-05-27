@@ -1,14 +1,26 @@
 import React, { useEffect } from 'react';
 import './RegistrationMain.css';
-import { Button, Col, Form, Input, Row, Select, Typography } from 'antd';
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  Row,
+  Select,
+  Typography,
+  message,
+} from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
+import { useNavigate } from 'react-router-dom';
 
 const { Text, Title } = Typography;
 
 const RegistrationMain = observer(() => {
   const { sharedStore } = useStore();
-  const { postRegistrationInfo, getIndustries, industries } = sharedStore;
+  const { postRegistrationInfo, getIndustries, industries, doesUserInSystem } =
+    sharedStore;
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (industries.length === 0) {
@@ -16,8 +28,15 @@ const RegistrationMain = observer(() => {
     }
   }, []);
 
+  useEffect(() => {
+    if (doesUserInSystem) {
+      navigate('/cabinet');
+    }
+  }, [doesUserInSystem]);
+
   const onFinish = (values: any) => {
     postRegistrationInfo(values);
+    message.info('Регистрируемся...');
     console.log('Success:', values);
   };
 
