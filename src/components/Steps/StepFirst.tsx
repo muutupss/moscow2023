@@ -1,5 +1,5 @@
 import { Input, Select, Typography, Col, Row, Checkbox } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 import './StepFirst.css';
@@ -19,27 +19,53 @@ const listOfTypeTaxes = [
 
 const { Text } = Typography;
 
-const StepFirst = ({ industries, patents }: any) => {
-  const [value, setValue] = useState('');
+const StepFirst = ({
+  industries,
+  patents,
+  registrationForms,
+  taxForms,
+  workerCount,
+  industryId,
+  registrationId,
+  taxId,
+  patentId,
+  changeCurrentStepValues,
+}: any) => {
+  const [checked, setChecked] = useState(false);
 
-  const onChange = (value: string) => {
-    console.log(`selected ${value}`);
+  useEffect(() => {
+    if (patentId) {
+      setChecked(true);
+    }
+  }, []);
+
+  const handleChangeTypeIndustry = (value: string) => {
+    changeCurrentStepValues('industry_id', value);
   };
 
   const handleChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      setValue(inputValue);
+      changeCurrentStepValues('worker_count', inputValue);
     }
   };
 
   const handleChangeTypeOrganization = (value: string) => {
-    console.log(`selected ${value}`);
+    changeCurrentStepValues('registration_id', value);
+  };
+
+  const handleChangeTypeTax = (value: string) => {
+    changeCurrentStepValues('tax_id', value);
   };
 
   const handleChangeCheckbox = (e: CheckboxChangeEvent) => {
+    setChecked(e.target.checked);
     console.log(`checked = ${e.target.checked}`);
+  };
+
+  const handleChangeTypePatient = (value: string) => {
+    changeCurrentStepValues('patent_id', value);
   };
 
   return (
@@ -52,7 +78,8 @@ const StepFirst = ({ industries, patents }: any) => {
               showSearch
               placeholder="Начните печатать"
               optionFilterProp="children"
-              onChange={onChange}
+              onChange={handleChangeTypeIndustry}
+              value={industryId}
               filterOption={(input, option) =>
                 (option?.label ?? '')
                   // @ts-ignore
@@ -72,7 +99,7 @@ const StepFirst = ({ industries, patents }: any) => {
               onChange={handleChangeNumber}
               placeholder="Введите число"
               maxLength={16}
-              value={value}
+              value={workerCount}
             />
           </div>
         </Col>
@@ -80,9 +107,9 @@ const StepFirst = ({ industries, patents }: any) => {
           <div className="step_first_text_plus_select">
             <Text strong>Тип организации</Text>
             <Select
-              defaultValue="ИП"
               onChange={handleChangeTypeOrganization}
-              options={listOfTypeOrganization}
+              value={registrationId}
+              options={registrationForms}
             />
           </div>
         </Col>
@@ -90,9 +117,9 @@ const StepFirst = ({ industries, patents }: any) => {
           <div className="step_first_text_plus_select">
             <Text strong>Тип налогооблажения</Text>
             <Select
-              defaultValue="Налоги 1"
-              onChange={handleChangeTypeOrganization}
-              options={listOfTypeTaxes}
+              onChange={handleChangeTypeTax}
+              value={taxId}
+              options={taxForms}
             />
           </div>
         </Col>
@@ -103,9 +130,11 @@ const StepFirst = ({ industries, patents }: any) => {
             <Text strong>Патент</Text>
             <Select
               showSearch
+              disabled={!checked}
               placeholder="Начните печатать"
               optionFilterProp="children"
-              onChange={onChange}
+              onChange={handleChangeTypePatient}
+              value={patentId}
               filterOption={(input, option) =>
                 (option?.label ?? '')
                   // @ts-ignore
@@ -118,7 +147,7 @@ const StepFirst = ({ industries, patents }: any) => {
         </Col>
         <Col span={6}>
           <div className="step_first_checkbox">
-            <Checkbox onChange={handleChangeCheckbox}>
+            <Checkbox checked={checked} onChange={handleChangeCheckbox}>
               Будем оформлять патент?
             </Checkbox>
           </div>

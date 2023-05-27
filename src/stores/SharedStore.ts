@@ -6,21 +6,23 @@ export default class SharedStore {
   industries: any = []
   patents: any = []
   districts: any = []
+  registrationForms: any = []
+  taxForms: any = []
   doesUserInSystem: boolean = false
   currentStepValues: any = {
-    "industry_id" : "",
-    "worker_count": 0,
-    "district_id": 1,
-    "land_area": 0,
-    "cap_building_area": 0,
-    "cap_rebuilding_area": 0,
-    "registration_id": 0,
-    "tax_id": 0,
-    "patent_id": 0,
-    "other_payments": 0,
+    "industry_id" : null,
+    "worker_count": null,
+    "district_id": null,
+    "land_area": null,
+    "cap_building_area": null,
+    "cap_rebuilding_area": null,
+    "registration_id": null,
+    "tax_id": null,
+    "patent_id": null,
+    "other_payments": null,
     "equipments": [],
     "buildings": [],
-    "calculation_id": 0
+    "calculation_id": null
   }
 
   constructor() {
@@ -29,6 +31,7 @@ export default class SharedStore {
   }
 
   changeCurrentStepValues = (key: any, value: any) => {
+    console.log(key, value, 'mzzz')
     switch (key) {
       case "equipments":
         this.currentStepValues["equipments"].add(value)
@@ -38,6 +41,7 @@ export default class SharedStore {
         break;
       default:
         this.currentStepValues[key] = value
+        break;
     }
   }
 
@@ -117,6 +121,30 @@ export default class SharedStore {
       id: districtsValue.id,
       value: districtsValue.name,
       label: districtsValue.name
+    })
+    });
+    }).catch((error: any) => {
+      console.log(JSON.stringify(error))
+    })
+  }
+
+  getRegtax = () => {
+    this.API.getRegtax().then((regtax: any) => {
+    console.log('regtax', regtax)
+    this.registrationForms = regtax?.data['registration_forms'].map((regtaxValue: any) => {
+      return (
+      {
+      id: regtaxValue.id,
+      value: regtaxValue.name,
+      label: regtaxValue.name
+    })
+    });
+    this.taxForms = regtax?.data['tax_forms'].map((regtaxValue: any) => {
+      return (
+      {
+      id: regtaxValue.id,
+      value: regtaxValue.name,
+      label: regtaxValue.name
     })
     });
     }).catch((error: any) => {

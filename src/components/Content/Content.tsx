@@ -31,9 +31,14 @@ const Content = observer(() => {
     getIndustries,
     getPatents,
     getDistricts,
+    changeCurrentStepValues,
+    getRegtax,
     industries,
     patents,
     districts,
+    currentStepValues,
+    registrationForms,
+    taxForms,
   } = sharedStore;
 
   useEffect(() => {
@@ -45,6 +50,9 @@ const Content = observer(() => {
     }
     if (districts.length === 0) {
       getDistricts();
+    }
+    if (taxForms.length === 0 || registrationForms.length === 0) {
+      getRegtax();
     }
   }, []);
 
@@ -67,7 +75,18 @@ const Content = observer(() => {
       <Steps current={current} items={items} />
       <div className="content_main">
         {current === 0 && (
-          <StepFirst industries={industries} patents={patents} />
+          <StepFirst
+            industries={industries}
+            patents={patents}
+            registrationForms={registrationForms}
+            taxForms={taxForms}
+            workerCount={currentStepValues['worker_count']}
+            industryId={currentStepValues['industry_id']}
+            registrationId={currentStepValues['registration_id']}
+            taxId={currentStepValues['tax_id']}
+            patentId={currentStepValues['patent_id']}
+            changeCurrentStepValues={changeCurrentStepValues}
+          />
         )}
         {current === 1 && <StepSecond districts={districts} />}
         {current === 2 && <StepThird />}
