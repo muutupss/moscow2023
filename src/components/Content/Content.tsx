@@ -33,6 +33,7 @@ const Content = observer(() => {
     getDistricts,
     changeCurrentStepValues,
     getRegtax,
+    postCalculator,
     industries,
     patents,
     districts,
@@ -67,7 +68,8 @@ const Content = observer(() => {
 
   const handleDoneButton = () => {
     message.info('Рассчитываем ваши затраты...');
-    navigate('/shortreport');
+    postCalculator();
+    //navigate('/shortreport');
   };
 
   return (
@@ -99,7 +101,12 @@ const Content = observer(() => {
             changeCurrentStepValues={changeCurrentStepValues}
           />
         )}
-        {current === 2 && <StepThird />}
+        {current === 2 && (
+          <StepThird
+            equipments={currentStepValues['equipments']}
+            changeCurrentStepValues={changeCurrentStepValues}
+          />
+        )}
       </div>
       <div style={{ marginTop: 24 }}>
         {current < steps.length - 1 && (

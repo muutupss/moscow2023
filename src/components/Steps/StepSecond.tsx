@@ -26,7 +26,7 @@ const StepSecond = ({
   buildings,
 }: any) => {
   const [valueSpecificObjects, setvalueSpecificObjects] = useState('');
-  const [valueSpecificObjectsCost, setvalueSpecificObjectsCost] = useState('');
+  const [valueSpecificObjectsCost, setvalueSpecificObjectsCost] = useState(0);
 
   const handleChangeSelectMoscowRegion = (value: string[]) => {
     changeCurrentStepValues('district_id', value);
@@ -36,7 +36,7 @@ const StepSecond = ({
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      changeCurrentStepValues('land_area', inputValue);
+      changeCurrentStepValues('land_area', parseInt(inputValue));
     }
   };
 
@@ -46,7 +46,7 @@ const StepSecond = ({
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      changeCurrentStepValues('cap_building_area', inputValue);
+      changeCurrentStepValues('cap_building_area', parseInt(inputValue));
     }
   };
 
@@ -56,7 +56,7 @@ const StepSecond = ({
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      changeCurrentStepValues('cap_rebuilding_area', inputValue);
+      changeCurrentStepValues('cap_rebuilding_area', parseInt(inputValue));
     }
   };
 
@@ -73,7 +73,7 @@ const StepSecond = ({
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      setvalueSpecificObjectsCost(inputValue);
+      setvalueSpecificObjectsCost(parseInt(inputValue));
     }
   };
 
@@ -84,7 +84,7 @@ const StepSecond = ({
         area: valueSpecificObjectsCost,
       });
       setvalueSpecificObjects('');
-      setvalueSpecificObjectsCost('');
+      setvalueSpecificObjectsCost(0);
     } else {
       message.info('Одно из полей не заполнено');
     }
@@ -173,7 +173,9 @@ const StepSecond = ({
                     onChange={handleChangeSpecificObjectsCost}
                     maxLength={16}
                     placeholder="3 м2"
-                    value={valueSpecificObjectsCost}
+                    value={
+                      valueSpecificObjectsCost ? valueSpecificObjectsCost : 0
+                    }
                   />
                 </div>
                 <div className="step_second_button_add__margin">
@@ -194,10 +196,7 @@ const StepSecond = ({
                 dataSource={buildings}
                 renderItem={(item: any, index) => (
                   <List.Item>
-                    <List.Item.Meta
-                      title={item?.name}
-                      description={item?.area}
-                    />
+                    <List.Item.Meta title={`${item?.name} ${item?.area} м2`} />
                   </List.Item>
                 )}
               />

@@ -47,7 +47,7 @@ const StepFirst = ({
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      changeCurrentStepValues('worker_count', inputValue);
+      changeCurrentStepValues('worker_count', parseInt(inputValue));
     }
   };
 

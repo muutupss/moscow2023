@@ -63,6 +63,27 @@ export default class SharedStore {
     })
   }
 
+  postCalculator = () => {
+    console.log(JSON.stringify(this.currentStepValues))
+    let mapCalculator = this.currentStepValues
+    if (this.currentStepValues.industry_id) {
+      mapCalculator.industry_id = this.industries.find((industry: any) => industry.value === mapCalculator.industry_id).id
+    }
+    if (this.currentStepValues.district_id) {
+      mapCalculator.district_id = this.districts.find((district: any) => district.value === mapCalculator.district_id).id
+    }
+    if (this.currentStepValues.registration_id) {
+      mapCalculator.registration_id = this.registrationForms.find((registrationForm: any) => registrationForm.value === mapCalculator.registration_id).id
+    }
+    if (this.currentStepValues.tax_id) {
+      mapCalculator.tax_id = this.taxForms.find((taxForm: any) => taxForm.value === mapCalculator.tax_id).id
+    }
+    if (this.currentStepValues.patent_id) {
+      mapCalculator.patent_id = this.patents.find((patent: any) => patent.value === mapCalculator.patent_id).id
+    }
+    console.log(JSON.stringify(mapCalculator))
+  }
+
   getLogin = (login: any) => {
     this.API.getLogin(login).then((user: any) => {
       localStorage.setItem('user', JSON.stringify(user));
