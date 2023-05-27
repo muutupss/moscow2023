@@ -54,6 +54,15 @@ export default class SharedStoreInfoAPI {
     return fetch(`${CURRENT_URL}/districts`, requestOptions).then(this.handleResponse);
   }
 
+  getRegtax = () => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json'},
+  } as any;
+
+    return fetch(`${CURRENT_URL}/regtax`, requestOptions).then(this.handleResponse);
+  }
+
   handleResponse(response : any) {
     return response.text().then((text: any) => {
         const data = text && JSON.parse(text);

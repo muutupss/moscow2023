@@ -11,6 +11,12 @@ const listOfTypeOrganization = [
   { value: 'Самозанятый', label: 'Самозанятый' },
 ];
 
+const listOfTypeTaxes = [
+  { value: 'Налоги 1', label: 'Налоги 1' },
+  { value: 'Налоги 2', label: 'Налоги 2' },
+  { value: 'Налоги 3', label: 'Налоги 3' },
+];
+
 const { Text } = Typography;
 
 const StepFirst = ({ industries, patents }: any) => {
@@ -77,6 +83,16 @@ const StepFirst = ({ industries, patents }: any) => {
               defaultValue="ИП"
               onChange={handleChangeTypeOrganization}
               options={listOfTypeOrganization}
+            />
+          </div>
+        </Col>
+        <Col span={6}>
+          <div className="step_first_text_plus_select">
+            <Text strong>Тип налогооблажения</Text>
+            <Select
+              defaultValue="Налоги 1"
+              onChange={handleChangeTypeOrganization}
+              options={listOfTypeTaxes}
             />
           </div>
         </Col>

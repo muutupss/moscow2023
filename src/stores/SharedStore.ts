@@ -7,10 +7,38 @@ export default class SharedStore {
   patents: any = []
   districts: any = []
   doesUserInSystem: boolean = false
+  currentStepValues: any = {
+    "industry_id" : "",
+    "worker_count": 0,
+    "district_id": 1,
+    "land_area": 0,
+    "cap_building_area": 0,
+    "cap_rebuilding_area": 0,
+    "registration_id": 0,
+    "tax_id": 0,
+    "patent_id": 0,
+    "other_payments": 0,
+    "equipments": [],
+    "buildings": [],
+    "calculation_id": 0
+  }
 
   constructor() {
     this.API = new SharedStoreInfoAPI()
     makeAutoObservable(this)
+  }
+
+  changeCurrentStepValues = (key: any, value: any) => {
+    switch (key) {
+      case "equipments":
+        this.currentStepValues["equipments"].add(value)
+        break;
+      case "buildings":
+        this.currentStepValues["buildings"].add(value)
+        break;
+      default:
+        this.currentStepValues[key] = value
+    }
   }
 
   postRegistrationInfo = (registation: any) => {
