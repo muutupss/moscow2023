@@ -34,10 +34,10 @@ export default class SharedStore {
     console.log(key, value, 'mzzz')
     switch (key) {
       case "equipments":
-        this.currentStepValues["equipments"].add(value)
+        this.currentStepValues["equipments"] = [...this.currentStepValues["equipments"], value]
         break;
       case "buildings":
-        this.currentStepValues["buildings"].add(value)
+        this.currentStepValues["buildings"] = [...this.currentStepValues["buildings"], value]
         break;
       default:
         this.currentStepValues[key] = value

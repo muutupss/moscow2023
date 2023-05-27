@@ -88,7 +88,17 @@ const Content = observer(() => {
             changeCurrentStepValues={changeCurrentStepValues}
           />
         )}
-        {current === 1 && <StepSecond districts={districts} />}
+        {current === 1 && (
+          <StepSecond
+            districts={districts}
+            landArea={currentStepValues['land_area']}
+            districtId={currentStepValues['district_id']}
+            capBuildingArea={currentStepValues['cap_building_area']}
+            capReBuildingArea={currentStepValues['cap_rebuilding_area']}
+            buildings={currentStepValues['buildings']}
+            changeCurrentStepValues={changeCurrentStepValues}
+          />
+        )}
         {current === 2 && <StepThird />}
       </div>
       <div style={{ marginTop: 24 }}>

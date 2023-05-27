@@ -1,85 +1,42 @@
 import React, { useState } from 'react';
 import DWChart from '../DWChart/DWChart';
-import { Button, Col, Input, List, Row, Select, Typography } from 'antd';
+import {
+  Button,
+  Col,
+  Input,
+  List,
+  Row,
+  Select,
+  Typography,
+  message,
+} from 'antd';
 
 import './StepSecond.css';
 import { PlusOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
-const optionsMoscowRegion = [
-  {
-    value: 'Центральный административный округ (ЦАО)',
-    label: 'Центральный административный округ (ЦАО)',
-  },
-  {
-    value: 'Северный административный округ (САО)',
-    label: 'Северный административный округ (САО)',
-  },
-  {
-    value: 'Северо-Восточный административный округ (СВАО)',
-    label: 'Северо-Восточный административный округ (СВАО)',
-  },
-  {
-    value: 'Восточный административный округ (ВАО)',
-    label: 'Восточный административный округ (ВАО)',
-  },
-  {
-    value: 'Юго-Восточный административный округ (ЮВАО)',
-    label: 'Юго-Восточный административный округ (ЮВАО)',
-  },
-  {
-    value: 'Южный административный округ (ЮАО)',
-    label: 'Южный административный округ (ЮАО)',
-  },
-  {
-    value: 'Юго-Западный административный округ (ЮЗАО)',
-    label: 'Юго-Западный административный округ (ЮЗАО)',
-  },
-  {
-    value: 'Западный административный округ (ЗАО)',
-    label: 'Западный административный округ (ЗАО)',
-  },
-  {
-    value: 'Северо-Западный административный округ (СЗАО)',
-    label: 'Северо-Западный административный округ (СЗАО)',
-  },
-  {
-    value: 'Новомосковский административный округ (НАО)',
-    label: 'Новомосковский административный округ (НАО)',
-  },
-];
-
-const data = [
-  {
-    title: 'Первая часть большого завода',
-    cost: '10',
-  },
-  {
-    title: 'Молокоперорабатывающий завод',
-    cost: '15',
-  },
-  {
-    title: 'Подсобное помещение 1',
-    cost: '20',
-  },
-  {
-    title: 'Подсобное помещение 2',
-    cost: '49',
-  },
-];
-
-const StepSecond = ({ districts }: any) => {
-  const [valueAll, setValueAll] = useState('');
-  const [valueObjects, setvalueObjects] = useState('');
+const StepSecond = ({
+  changeCurrentStepValues,
+  districts,
+  landArea,
+  districtId,
+  capBuildingArea,
+  capReBuildingArea,
+  buildings,
+}: any) => {
   const [valueSpecificObjects, setvalueSpecificObjects] = useState('');
   const [valueSpecificObjectsCost, setvalueSpecificObjectsCost] = useState('');
+
+  const handleChangeSelectMoscowRegion = (value: string[]) => {
+    changeCurrentStepValues('district_id', value);
+  };
 
   const handleChangeNumberAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      setValueAll(inputValue);
+      changeCurrentStepValues('land_area', inputValue);
     }
   };
 
@@ -89,12 +46,18 @@ const StepSecond = ({ districts }: any) => {
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      setvalueObjects(inputValue);
+      changeCurrentStepValues('cap_building_area', inputValue);
     }
   };
 
-  const handleChangeSelectMoscowRegion = (value: string[]) => {
-    console.log(`selected ${value}`);
+  const handleChangeNumberRebuildObjects = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const { value: inputValue } = e.target;
+    const reg = /^-?\d*(\.\d*)?$/;
+    if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
+      changeCurrentStepValues('cap_rebuilding_area', inputValue);
+    }
   };
 
   const handleChangeSpecificObjects = (
@@ -114,6 +77,19 @@ const StepSecond = ({ districts }: any) => {
     }
   };
 
+  const handleClickAddBuild = () => {
+    if (valueSpecificObjects && valueSpecificObjectsCost) {
+      changeCurrentStepValues('buildings', {
+        name: valueSpecificObjects,
+        area: valueSpecificObjectsCost,
+      });
+      setvalueSpecificObjects('');
+      setvalueSpecificObjectsCost('');
+    } else {
+      message.info('Одно из полей не заполнено');
+    }
+  };
+
   return (
     <>
       <Row gutter={32}>
@@ -127,6 +103,7 @@ const StepSecond = ({ districts }: any) => {
                   placeholder="Начните печатать"
                   optionFilterProp="children"
                   onChange={handleChangeSelectMoscowRegion}
+                  value={districtId}
                   filterOption={(input, option) =>
                     (option?.label ?? '')
                       // @ts-ignore
@@ -146,7 +123,7 @@ const StepSecond = ({ districts }: any) => {
                   onChange={handleChangeNumberAll}
                   placeholder="Введите число в м2"
                   maxLength={16}
-                  value={valueAll}
+                  value={landArea}
                 />
               </div>
             </Col>
@@ -159,7 +136,20 @@ const StepSecond = ({ districts }: any) => {
                   onChange={handleChangeNumberObjects}
                   placeholder="Введите число в м2"
                   maxLength={16}
-                  value={valueObjects}
+                  value={capBuildingArea}
+                />
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={16}>
+              <div className="step_second_text_plus_select">
+                <Text strong>Площадь объектов капитального переделывания</Text>
+                <Input
+                  onChange={handleChangeNumberRebuildObjects}
+                  placeholder="Введите число в м2"
+                  maxLength={16}
+                  value={capReBuildingArea}
                 />
               </div>
             </Col>
@@ -188,6 +178,7 @@ const StepSecond = ({ districts }: any) => {
                 </div>
                 <div className="step_second_button_add__margin">
                   <Button
+                    onClick={handleClickAddBuild}
                     type="primary"
                     shape="circle"
                     icon={<PlusOutlined />}
@@ -200,12 +191,12 @@ const StepSecond = ({ districts }: any) => {
             <Col span={24}>
               <List
                 itemLayout="horizontal"
-                dataSource={data}
-                renderItem={(item, index) => (
+                dataSource={buildings}
+                renderItem={(item: any, index) => (
                   <List.Item>
                     <List.Item.Meta
-                      title={item.title}
-                      description={item.cost}
+                      title={item?.name}
+                      description={item?.area}
                     />
                   </List.Item>
                 )}
