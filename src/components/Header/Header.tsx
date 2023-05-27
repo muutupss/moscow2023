@@ -5,21 +5,16 @@ import './Header.css';
 import { useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '../../hooks/use-store';
 
 const Header = observer(() => {
   let location = useLocation();
   const navigate = useNavigate();
-  const { sharedStore } = useStore();
-  const { user, setUser } = sharedStore;
 
   const handleClickRegistationButton = () => {
-    setUser('0000001');
     navigate('/registration');
   };
 
   const handleClickLoginButton = () => {
-    console.log(user);
     navigate('/login');
   };
 

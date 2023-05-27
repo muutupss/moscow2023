@@ -4,29 +4,6 @@ import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 import './StepFirst.css';
 
-const listOfIndustry = [
-  {
-    value: 'Автомобильная промышленность',
-    label: 'Автомобильная промышленность',
-  },
-  {
-    value: 'Металлургия и металлообработка',
-    label: 'Металлургия и металлообработка',
-  },
-  {
-    value: 'Фармацевтическая промышленность',
-    label: 'Фармацевтическая промышленность',
-  },
-  {
-    value: 'Производство строительных материалов',
-    label: 'Производство строительных материалов',
-  },
-  {
-    value: 'Радиоэлектроника и приборостроение',
-    label: 'Радиоэлектроника и приборостроение',
-  },
-];
-
 const listOfTypeOrganization = [
   { value: 'ИП', label: 'ИП' },
   { value: 'АО', label: 'АО' },
@@ -36,8 +13,9 @@ const listOfTypeOrganization = [
 
 const { Text } = Typography;
 
-const StepFirst = () => {
+const StepFirst = ({ industries }: any) => {
   const [value, setValue] = useState('');
+  console.log('industries', JSON.stringify(industries));
 
   const onChange = (value: string) => {
     console.log(`selected ${value}`);
@@ -72,10 +50,11 @@ const StepFirst = () => {
               onChange={onChange}
               filterOption={(input, option) =>
                 (option?.label ?? '')
+                  // @ts-ignore
                   .toLowerCase()
                   .includes(input.toLowerCase())
               }
-              options={listOfIndustry}
+              options={industries.length !== 0 ? industries : []}
             />
           </div>
         </Col>

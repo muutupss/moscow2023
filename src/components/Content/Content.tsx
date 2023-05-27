@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Steps, message } from 'antd';
 import StepFirst from '../Steps/StepFirst';
 import StepSecond from '../Steps/StepSecond';
 import StepThird from '../Steps/StepThird';
+
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../hooks/use-store';
 
 import './Content.css';
 import { useNavigate } from 'react-router-dom';
@@ -19,9 +22,17 @@ const steps = [
   },
 ];
 
-const Content = () => {
+const Content = observer(() => {
   const [current, setCurrent] = useState(0);
   const navigate = useNavigate();
+
+  const { sharedStore } = useStore();
+  const { getIndustries, industries } = sharedStore;
+
+  useEffect(() => {
+    getIndustries();
+  }, [getIndustries]);
+
   const next = () => {
     setCurrent(current + 1);
   };
@@ -40,7 +51,7 @@ const Content = () => {
     <div>
       <Steps current={current} items={items} />
       <div className="content_main">
-        {current === 0 && <StepFirst />}
+        {current === 0 && <StepFirst industries={industries} />}
         {current === 1 && <StepSecond />}
         {current === 2 && <StepThird />}
       </div>
@@ -63,6 +74,6 @@ const Content = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Content;

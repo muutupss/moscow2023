@@ -3,22 +3,46 @@ import SharedStoreInfoAPI from './SharedStoreAPI'
 
 export default class SharedStore {
   API: any = {}
-  user = '1234567890'
+  industries: any = []
 
   constructor() {
     this.API = new SharedStoreInfoAPI()
     makeAutoObservable(this)
   }
 
-  setUser = (value: string) => {
-    this.user = value;
-  }
-
   postRegistrationInfo = (registation: any) => {
-    this.API.postRegistrationInfo(registation).then((result: any) => {
-      console.log(JSON.stringify(result))
+    this.API.postRegistrationInfo(registation)
+    .then((user: any) => {
+      localStorage.setItem('user', JSON.stringify(user));
+      console.log(JSON.stringify(user))
     }
     ).catch((error: any) => {
+      console.log(JSON.stringify(error))
+    })
+  }
+
+  getLogin = (login: any) => {
+    this.API.getLogin(login).then((user: any) => {
+      localStorage.setItem('user', JSON.stringify(user));
+      console.log(JSON.stringify(user))
+    }
+    ).catch((error: any) => {
+      console.log(JSON.stringify(error))
+    })
+  }
+
+  getIndustries = () => {
+    this.API.getIndustries().then((industries: any) => {
+    console.log('industries', industries)
+    this.industries = industries?.industries.map((industriesValue: any) => {
+      return (
+      {
+      id: industriesValue.id,
+      value: industriesValue.name,
+      label: industriesValue.name
+    })
+    });
+    }).catch((error: any) => {
       console.log(JSON.stringify(error))
     })
   }
@@ -26,6 +50,3 @@ export default class SharedStore {
 }
 
 export type SharedStoreType = typeof SharedStore.prototype
-export const initSharedStore = {
-  user: '1234567890'
-}

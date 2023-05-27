@@ -1,11 +1,17 @@
 import React from 'react';
 import './LoginMain.css';
 import { Button, Form, Input, Typography } from 'antd';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../hooks/use-store';
 
 const { Text, Title } = Typography;
 
-function LoginMain() {
+const LoginMain = observer(() => {
+  const { sharedStore } = useStore();
+  const { getLogin } = sharedStore;
+
   const onFinish = (values: any) => {
+    getLogin(values);
     console.log('Success:', values);
   };
 
@@ -28,7 +34,7 @@ function LoginMain() {
       >
         <Text strong>Email</Text>
         <Form.Item
-          name="username"
+          name="email"
           rules={[{ required: true, message: 'Please input your username!' }]}
         >
           <Input />
@@ -50,6 +56,6 @@ function LoginMain() {
       </Form>
     </>
   );
-}
+});
 
 export default LoginMain;
