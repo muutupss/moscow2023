@@ -30,8 +30,10 @@ const Content = observer(() => {
   const { getIndustries, industries } = sharedStore;
 
   useEffect(() => {
-    getIndustries();
-  }, [getIndustries]);
+    if (industries.length === 0) {
+      getIndustries();
+    }
+  }, []);
 
   const next = () => {
     setCurrent(current + 1);

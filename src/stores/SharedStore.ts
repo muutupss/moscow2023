@@ -11,7 +11,13 @@ export default class SharedStore {
   }
 
   postRegistrationInfo = (registation: any) => {
-    this.API.postRegistrationInfo(registation)
+    let mapRegistation = registation
+
+    if (registation.industry_id) {
+      mapRegistation.industry_id = this.industries.find((industry: any) => industry.value === mapRegistation.industry_id).id
+    }
+  
+    this.API.postRegistrationInfo(mapRegistation)
     .then((user: any) => {
       localStorage.setItem('user', JSON.stringify(user));
       console.log(JSON.stringify(user))

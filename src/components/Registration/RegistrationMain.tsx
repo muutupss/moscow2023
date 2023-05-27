@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './RegistrationMain.css';
-import { Button, Col, Form, Input, Row, Typography } from 'antd';
+import { Button, Col, Form, Input, Row, Select, Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
 
@@ -8,7 +8,13 @@ const { Text, Title } = Typography;
 
 const RegistrationMain = observer(() => {
   const { sharedStore } = useStore();
-  const { postRegistrationInfo } = sharedStore;
+  const { postRegistrationInfo, getIndustries, industries } = sharedStore;
+
+  useEffect(() => {
+    if (industries.length === 0) {
+      getIndustries();
+    }
+  }, []);
 
   const onFinish = (values: any) => {
     postRegistrationInfo(values);
@@ -82,7 +88,18 @@ const RegistrationMain = observer(() => {
 
         <Text strong>Отрасль ведения хозяйственной деятельности</Text>
         <Form.Item name="industry_id">
-          <Input />
+          <Select
+            showSearch
+            placeholder="Начните печатать"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              (option?.label ?? '')
+                // @ts-ignore
+                .toLowerCase()
+                .includes(input.toLowerCase())
+            }
+            options={industries.length !== 0 ? industries : []}
+          />
         </Form.Item>
 
         <Row gutter={16}>
