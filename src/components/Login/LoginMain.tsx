@@ -3,23 +3,32 @@ import './LoginMain.css';
 import { Button, Divider, Form, Input, Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const { Text, Title } = Typography;
 
 const LoginMain = observer(() => {
   const { sharedStore } = useStore();
-  const { getLogin, doesUserInSystem } = sharedStore;
+  const { getLogin, doesUserInSystem, isUserAdmin } = sharedStore;
   const navigate = useNavigate();
+  let location = useLocation();
 
   useEffect(() => {
     if (doesUserInSystem) {
-      navigate('/cabinet');
+      if (isUserAdmin) {
+        navigate('/admin');
+      } else {
+        navigate('/cabinet');
+      }
     }
   }, [doesUserInSystem]);
 
   const onFinish = (values: any) => {
-    getLogin(values);
+    if (location.pathname === '/adminlogin') {
+      getLogin(values, true);
+    } else {
+      getLogin(values, false);
+    }
     console.log('Success:', values);
   };
 
@@ -27,14 +36,34 @@ const LoginMain = observer(() => {
     console.log('Failed:', errorInfo);
   };
 
-  return (
-    <div>
+  const handleIsThisAdmin = () => {
+    if (location.pathname === '/adminlogin') {
+      return (
+        <Title
+          style={{
+            marginTop: '20px',
+            marginBottom: '35px',
+            textAlign: 'center',
+          }}
+          level={4}
+        >
+          Секретный вход для администратора
+        </Title>
+      );
+    }
+    return (
       <Title
         style={{ marginTop: '20px', marginBottom: '35px', textAlign: 'center' }}
         level={4}
       >
         Вход
       </Title>
+    );
+  };
+
+  return (
+    <div>
+      {handleIsThisAdmin()}
       <Divider />
       <Form
         name="basic"

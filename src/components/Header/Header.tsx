@@ -26,7 +26,7 @@ const Header = observer(() => {
   let location = useLocation();
   const navigate = useNavigate();
   const { sharedStore } = useStore();
-  const { logout } = sharedStore;
+  const { logout, isUserAdmin, doesUserInSystem } = sharedStore;
 
   const handleClickRegistationButton = () => {
     navigate('/registration');
@@ -43,12 +43,17 @@ const Header = observer(() => {
   const onClick: MenuProps['onClick'] = ({ key }) => {
     switch (key) {
       case '1':
-        navigate('/cabinet');
+        if (isUserAdmin) {
+          navigate('/admin');
+        } else {
+          navigate('/cabinet');
+        }
         break;
       case '2':
         break;
       case '3':
         logout();
+        navigate('/');
         break;
       default:
         break;
@@ -57,7 +62,8 @@ const Header = observer(() => {
 
   const handleLoginButton = () => {
     return location.pathname !== '/login' &&
-      location.pathname !== '/cabinet' ? (
+      location.pathname !== '/adminlogin' &&
+      !doesUserInSystem ? (
       <Button danger onClick={handleClickLoginButton}>
         Войти
       </Button>
@@ -68,7 +74,8 @@ const Header = observer(() => {
 
   const handleRegistationButton = () => {
     return location.pathname !== '/registration' &&
-      location.pathname !== '/cabinet' ? (
+      location.pathname !== '/adminlogin' &&
+      !doesUserInSystem ? (
       <Button type="primary" danger onClick={handleClickRegistationButton}>
         Регистрация
       </Button>
@@ -78,7 +85,7 @@ const Header = observer(() => {
   };
 
   const handleAppFormButton = () => {
-    return location.pathname === '/cabinet' ? (
+    return doesUserInSystem ? (
       <div className="header_calculate__margin">
         <Button type="primary" danger onClick={handleClickAppFormButton}>
           Рассчитать вложения
@@ -90,7 +97,7 @@ const Header = observer(() => {
   };
 
   const handleProfileIcon = () => {
-    return location.pathname === '/cabinet' ? (
+    return doesUserInSystem ? (
       <Dropdown menu={{ items, onClick }} placement="bottomLeft">
         <UserOutlined style={{ fontSize: '32px', color: 'red' }} />
       </Dropdown>

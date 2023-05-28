@@ -52,6 +52,11 @@ const router = createBrowserRouter([
     element: <AdminPage />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: '/adminlogin',
+    element: <LoginPage />,
+    errorElement: <ErrorPage />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(

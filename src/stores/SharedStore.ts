@@ -9,6 +9,7 @@ export default class SharedStore {
   registrationForms: any = []
   taxForms: any = []
   doesUserInSystem: boolean = false
+  isUserAdmin: boolean = false
   currentStepValues: any = {
     "industry_id" : null,
     "worker_count": null,
@@ -164,10 +165,11 @@ export default class SharedStore {
     })
   }
 
-  getLogin = (login: any) => {
+  getLogin = (login: any, isUserAdmin: boolean) => {
     this.API.getLogin(login).then((user: any) => {
       localStorage.setItem('user', JSON.stringify(user));
       this.doesUserInSystem = true;
+      this.isUserAdmin = isUserAdmin;
       console.log(JSON.stringify(user))
     }
     ).catch((error: any) => {

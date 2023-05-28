@@ -12,6 +12,7 @@ function AdminPage() {
       <div className="admin_page_content">
         <AdminMain />
       </div>
+      <div className="empty_block"></div>
     </div>
   );
 }
