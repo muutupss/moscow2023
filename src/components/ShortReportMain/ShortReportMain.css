@@ -6,3 +6,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.short_report__padding_center{
+  padding: 40px
+}

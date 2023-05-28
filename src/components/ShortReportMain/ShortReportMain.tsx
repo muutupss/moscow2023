@@ -1,6 +1,6 @@
 import React from 'react';
 import './ShortReportMain.css';
-import { Typography } from 'antd';
+import { Divider, Typography } from 'antd';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { observer } from 'mobx-react-lite';
@@ -13,21 +13,29 @@ const ShortReportMain = observer(() => {
   const { optionsForChart, currentResultsTotal } = sharedStore;
   console.log(currentResultsTotal.total_from, currentResultsTotal.total_to);
   return (
-    <>
-      <div className="short_report_main_text_title__magin">
-        <Title level={3}>Краткий отчет</Title>
+    <div>
+      <Title
+        style={{ marginTop: '20px', marginBottom: '35px', textAlign: 'center' }}
+        level={4}
+      >
+        Краткий отчет
+      </Title>
+      <Divider />
+      <div className="short_report__padding_center">
+        <div className="short_report_main_sum">
+          <Title style={{ margin: '0px' }} level={4}>
+            Сумма ваших вложений
+          </Title>
+          <Title style={{ margin: '0px' }} level={4}>
+            {currentResultsTotal.total_from}-{currentResultsTotal.total_to} тыщ
+            рублей
+          </Title>
+        </div>
+        <div>
+          <HighchartsReact highcharts={Highcharts} options={optionsForChart} />
+        </div>
       </div>
-      <div className="short_report_main_sum">
-        <Title level={4}>Сумма ваших вложений</Title>
-        <Title level={4}>
-          {currentResultsTotal.total_from}-{currentResultsTotal.total_to} тыщ
-          рублей
-        </Title>
-      </div>
-      <div>
-        <HighchartsReact highcharts={Highcharts} options={optionsForChart} />
-      </div>
-    </>
+    </div>
   );
 });
 
