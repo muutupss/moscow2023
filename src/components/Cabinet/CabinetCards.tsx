@@ -24,6 +24,13 @@ const CabinetCards = ({ options, industries, deleteCard }: any) => {
     }
   }, [industries.length]);
 
+  const handleDataUpdate = (data: any) => {
+    const value = new Date(data);
+    return `${value.toLocaleTimeString('en-GB')} ${value.toLocaleDateString(
+      'en-GB',
+    )}`;
+  };
+
   return (
     <div>
       <div className="cabinet_card">
@@ -34,7 +41,7 @@ const CabinetCards = ({ options, industries, deleteCard }: any) => {
                 <Title level={4}>Дата создания отчета: </Title>
               </div>
               <div className="cabinet_text__margin">
-                <Title level={4}>{options.UpdatedAt}</Title>
+                <Title level={4}>{handleDataUpdate(options.UpdatedAt)}</Title>
               </div>
             </div>
             <div className="cabinet_title_plus_text">
@@ -51,7 +58,9 @@ const CabinetCards = ({ options, industries, deleteCard }: any) => {
               </div>
               <div className="cabinet_text__margin">
                 <Title level={4}>
-                  {options.ResultFrom} — {options.ResultTo} рублей
+                  {Math.trunc(parseInt(options.ResultFrom) / 10000) / 100}-
+                  {Math.trunc(parseInt(options.ResultTo) / 10000) / 100} млн
+                  рублей
                 </Title>
               </div>
             </div>

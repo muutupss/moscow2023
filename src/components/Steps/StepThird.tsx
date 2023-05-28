@@ -44,7 +44,7 @@ const StepThird = ({ changeCurrentStepValues, equipments }: any) => {
     ) {
       changeCurrentStepValues('equipments', {
         name: valueSpecificObjects,
-        price_rub: valueSpecificObjectsCost,
+        price_rub: valueSpecificObjectsCost * 1000,
         count: valueSpecificObjectsSum,
       });
       setvalueSpecificObjects('');
@@ -71,11 +71,11 @@ const StepThird = ({ changeCurrentStepValues, equipments }: any) => {
         <Col span={10}>
           <div className="step_second_text_input_plus_button">
             <div className="step_second_text_plus_select">
-              <Text strong>Цена в тыщ руб</Text>
+              <Text strong>Цена в тысяч руб</Text>
               <Input
                 onChange={handleChangeSpecificObjectsCost}
                 maxLength={16}
-                placeholder="300 тыщ"
+                placeholder="300 тысяч"
                 value={valueSpecificObjectsCost ? valueSpecificObjectsCost : 0}
               />
             </div>
@@ -108,7 +108,7 @@ const StepThird = ({ changeCurrentStepValues, equipments }: any) => {
               <List.Item>
                 <List.Item.Meta
                   title={item?.name}
-                  description={`${item['price_rub']} тыщ рублей ${item?.count} шт`}
+                  description={`${item['price_rub']} рублей ${item?.count} шт`}
                 />
               </List.Item>
             )}

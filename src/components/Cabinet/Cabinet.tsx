@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { isUserInSystemLocalStorage } from '../../helper/auth-header';
 import { Typography } from 'antd';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const Cabinet = observer(() => {
   const navigate = useNavigate();

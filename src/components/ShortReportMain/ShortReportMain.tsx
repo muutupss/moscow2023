@@ -28,8 +28,9 @@ const ShortReportMain = observer(() => {
             Сумма ваших вложений
           </Title>
           <Title style={{ margin: '0px' }} level={4}>
-            {currentResultsTotal.total_from}-{currentResultsTotal.total_to} тыщ
-            рублей
+            {Math.trunc(parseInt(currentResultsTotal.total_from) / 10000) / 100}
+            -{Math.trunc(parseInt(currentResultsTotal.total_to) / 10000) / 100}{' '}
+            млн рублей
           </Title>
         </div>
         <div>

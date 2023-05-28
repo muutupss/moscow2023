@@ -63,21 +63,21 @@ export default class SharedStore {
       colorByPoint: true,
       data: [
         {
-          name: 'Строительство',
+          name: 'Персонал',
           y: 0,
           sliced: true,
           selected: true,
         },
         {
-          name: 'Зарплата',
-          y: 0,
-        },
-        {
-          name: 'Оборудование',
+          name: 'Имущество/Оборудование',
           y: 0,
         },
         {
           name: 'Налоги',
+          y: 0,
+        },
+        {
+          name: 'Услуги (Стротельство/Ремонт/Бух учет)',
           y: 0,
         },
       ],
