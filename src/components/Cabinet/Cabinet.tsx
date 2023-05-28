@@ -29,14 +29,14 @@ const Cabinet = observer(() => {
   };
 
   return (
-    <>
+    <div className="cabinet__margin">
       <CabinetCards />
       <CabinetCards />
       <CabinetCards />
       <CabinetCards />
       <CabinetCards />
       <CabinetCards />
-    </>
+    </div>
   );
 });
 

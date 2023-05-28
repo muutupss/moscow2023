@@ -12,6 +12,7 @@ function LoginPage() {
       <div className="login_page_content">
         <LoginMain />
       </div>
+      <div className="empty_block"></div>
     </div>
   );
 }

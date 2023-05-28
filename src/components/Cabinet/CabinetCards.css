@@ -1,10 +1,11 @@
 .cabinet_card {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     border-radius: 8px;
     margin-bottom: 20px;
+    background-color: #FFFFFF;
   }
 
 .cabinet_title_plus_text {

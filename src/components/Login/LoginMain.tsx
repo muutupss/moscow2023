@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './LoginMain.css';
-import { Button, Form, Input, Typography } from 'antd';
+import { Button, Divider, Form, Input, Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
 import { useNavigate } from 'react-router-dom';
@@ -28,11 +28,14 @@ const LoginMain = observer(() => {
   };
 
   return (
-    <>
-      <div className="login_main_text__magin">
-        <Title level={3}>Вход</Title>
-      </div>
-
+    <div>
+      <Title
+        style={{ marginTop: '20px', marginBottom: '35px', textAlign: 'center' }}
+        level={4}
+      >
+        Вход
+      </Title>
+      <Divider />
       <Form
         name="basic"
         initialValues={{ remember: true }}
@@ -40,7 +43,10 @@ const LoginMain = observer(() => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Text strong>Email</Text>
+        <Text strong>Email </Text>
+        <Text strong style={{ color: 'red' }}>
+          *
+        </Text>
         <Form.Item
           name="email"
           rules={[{ required: true, message: 'Please input your username!' }]}
@@ -48,7 +54,10 @@ const LoginMain = observer(() => {
           <Input />
         </Form.Item>
 
-        <Text strong>Password</Text>
+        <Text strong>Password </Text>
+        <Text strong style={{ color: 'red' }}>
+          *
+        </Text>
         <Form.Item
           name="password"
           rules={[{ required: true, message: 'Please input your password!' }]}
@@ -62,7 +71,7 @@ const LoginMain = observer(() => {
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </div>
   );
 });
 
