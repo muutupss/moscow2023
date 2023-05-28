@@ -3,6 +3,7 @@ import './RegistrationMain.css';
 import {
   Button,
   Col,
+  Divider,
   Form,
   Input,
   Row,
@@ -45,11 +46,14 @@ const RegistrationMain = observer(() => {
   };
 
   return (
-    <>
-      <div className="registration_main_text__magin">
-        <Title level={3}>Регистрация</Title>
-      </div>
-
+    <div>
+      <Title
+        style={{ marginTop: '20px', marginBottom: '35px', textAlign: 'center' }}
+        level={4}
+      >
+        Регистрация
+      </Title>
+      <Divider />
       <Form
         name="basic"
         initialValues={{ remember: true }}
@@ -57,7 +61,10 @@ const RegistrationMain = observer(() => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Text strong>Фамилия</Text>
+        <Text strong>Фамилия </Text>
+        <Text strong style={{ color: 'red' }}>
+          *
+        </Text>
         <Form.Item
           name="last_name"
           rules={[
@@ -67,7 +74,10 @@ const RegistrationMain = observer(() => {
           <Input />
         </Form.Item>
 
-        <Text strong>Имя</Text>
+        <Text strong>Имя </Text>
+        <Text strong style={{ color: 'red' }}>
+          *
+        </Text>
         <Form.Item
           name="first_name"
           rules={[{ required: true, message: 'Пожалуйста введите ваше Имя' }]}
@@ -93,7 +103,10 @@ const RegistrationMain = observer(() => {
             </Form.Item>
           </Col>
           <Col span={6}>
-            <Text strong>ИНН</Text>
+            <Text strong>ИНН </Text>
+            <Text strong style={{ color: 'red' }}>
+              *
+            </Text>
             <Form.Item
               name="INN"
               rules={[
@@ -141,7 +154,10 @@ const RegistrationMain = observer(() => {
           <Input />
         </Form.Item>
 
-        <Text strong>Адрес электронной почты</Text>
+        <Text strong>Адрес электронной почты </Text>
+        <Text strong style={{ color: 'red' }}>
+          *
+        </Text>
         <Form.Item
           name="email"
           rules={[{ required: true, message: 'Пожалуйста введите вашу Почту' }]}
@@ -149,7 +165,10 @@ const RegistrationMain = observer(() => {
           <Input />
         </Form.Item>
 
-        <Text strong>Password</Text>
+        <Text strong>Пароль </Text>
+        <Text strong style={{ color: 'red' }}>
+          *
+        </Text>
         <Form.Item
           name="password"
           rules={[{ required: true, message: 'Пожалуйста введите ваш Пароль' }]}
@@ -158,12 +177,12 @@ const RegistrationMain = observer(() => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button danger type="primary" htmlType="submit">
             Зарегистрироваться
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </div>
   );
 });
 

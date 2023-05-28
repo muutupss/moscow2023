@@ -12,6 +12,7 @@ function RegistrationPage() {
       <div className="registration_page_content">
         <RegistrationMain />
       </div>
+      <div className="empty_block"></div>
     </div>
   );
 }
