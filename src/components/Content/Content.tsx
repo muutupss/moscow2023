@@ -79,7 +79,7 @@ const Content = observer(() => {
         style={{ marginTop: '20px', marginBottom: '35px', textAlign: 'center' }}
         level={4}
       >
-        Ответьте на следующие вопросы и умный сервис рассчитает необходимые
+        Ответьте на следующие вопросы, и умный сервис рассчитает необходимые
         вложения
       </Title>
       <Divider />
@@ -121,17 +121,17 @@ const Content = observer(() => {
         <div style={{ marginTop: 24 }}>
           {current < steps.length - 1 && (
             <Button type="primary" onClick={() => next()}>
-              Next
+              Далее
             </Button>
           )}
           {current === steps.length - 1 && (
             <Button type="primary" onClick={handleDoneButton}>
-              Done
+              Рассчитать
             </Button>
           )}
           {current > 0 && (
             <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-              Previous
+              Назад
             </Button>
           )}
         </div>

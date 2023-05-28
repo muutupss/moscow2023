@@ -60,7 +60,7 @@ const StepThird = ({ changeCurrentStepValues, equipments }: any) => {
       <Row gutter={16}>
         <Col span={14}>
           <div className="step_second_text_plus_select">
-            <Text strong>Оборудование/Иные затраты</Text>
+            <Text strong>Оборудование/иные затраты</Text>
             <Input
               onChange={handleChangeSpecificObjects}
               placeholder="Название оборубования/объекта"
@@ -71,7 +71,7 @@ const StepThird = ({ changeCurrentStepValues, equipments }: any) => {
         <Col span={10}>
           <div className="step_second_text_input_plus_button">
             <div className="step_second_text_plus_select">
-              <Text strong>Цена в тысяч руб</Text>
+              <Text strong>Цена в тыс. руб.</Text>
               <Input
                 onChange={handleChangeSpecificObjectsCost}
                 maxLength={16}

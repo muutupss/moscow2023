@@ -6,7 +6,10 @@ import { useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
-import { isUserInSystemLocalStorage } from '../../helper/auth-header';
+import {
+  isUserInSystemLocalStorage,
+  isAdminInSystemLocalStorage,
+} from '../../helper/auth-header';
 
 const items: MenuProps['items'] = [
   {
@@ -15,10 +18,6 @@ const items: MenuProps['items'] = [
   },
   {
     key: '2',
-    label: 'Мои данные',
-  },
-  {
-    key: '3',
     label: 'Выйти',
   },
 ];
@@ -27,7 +26,7 @@ const Header = observer(() => {
   let location = useLocation();
   const navigate = useNavigate();
   const { sharedStore } = useStore();
-  const { logout, isUserAdmin } = sharedStore;
+  const { logout } = sharedStore;
 
   const handleClickRegistationButton = () => {
     navigate('/registration');
@@ -44,15 +43,13 @@ const Header = observer(() => {
   const onClick: MenuProps['onClick'] = ({ key }) => {
     switch (key) {
       case '1':
-        if (isUserAdmin) {
+        if (isAdminInSystemLocalStorage()) {
           navigate('/admin');
         } else {
           navigate('/cabinet');
         }
         break;
       case '2':
-        break;
-      case '3':
         logout();
         navigate('/');
         break;

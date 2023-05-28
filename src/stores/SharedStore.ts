@@ -9,7 +9,6 @@ export default class SharedStore {
   registrationForms: any = []
   taxForms: any = []
   doesUserInSystem: boolean = false
-  isUserAdmin: boolean = false
   currentStepValues: any = {
     "industry_id" : null,
     "worker_count": null,
@@ -69,7 +68,7 @@ export default class SharedStore {
           selected: true,
         },
         {
-          name: 'Имущество/Оборудование',
+          name: 'Имущество/оборудование',
           y: 0,
         },
         {
@@ -77,7 +76,7 @@ export default class SharedStore {
           y: 0,
         },
         {
-          name: 'Услуги (Стротельство/Ремонт/Бух учет)',
+          name: 'Услуги (стротельство/ремонт/бухучет)',
           y: 0,
         },
       ],
@@ -179,13 +178,35 @@ export default class SharedStore {
   getLogin = (login: any, isUserAdmin: boolean) => {
     this.API.getLogin(login).then((user: any) => {
       localStorage.setItem('user', JSON.stringify(user));
+      if (isUserAdmin) {
+        localStorage.setItem('admin', 'true');
+      } else {
+        localStorage.removeItem('admin');
+      }
       this.doesUserInSystem = true;
-      this.isUserAdmin = isUserAdmin;
       console.log(JSON.stringify(user))
     }
     ).catch((error: any) => {
       console.log(JSON.stringify(error))
     })
+  }
+
+  resetCurrentStepValues = () => {
+    this.currentStepValues = {
+      "industry_id" : null,
+      "worker_count": null,
+      "district_id": null,
+      "land_area": null,
+      "cap_building_area": null,
+      "cap_rebuilding_area": null,
+      "registration_id": null,
+      "tax_id": null,
+      "patent_id": null,
+      "other_payments": null,
+      "equipments": [],
+      "buildings": [],
+      "calculation_id": null
+    }
   }
 
   getListCalculator = () => {
@@ -201,6 +222,7 @@ export default class SharedStore {
   logout = () => {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
+    localStorage.removeItem('admin');
     this.doesUserInSystem = false;
   }
 

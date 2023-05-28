@@ -19,6 +19,7 @@ const Cabinet = observer(() => {
     deleteCard,
     listCurrentCalculators,
     industries,
+    resetCurrentStepValues,
   } = sharedStore;
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const Cabinet = observer(() => {
     } else {
       getListCalculator();
       getIndustries();
+      resetCurrentStepValues();
     }
   }, [doesUserInSystem]);
 

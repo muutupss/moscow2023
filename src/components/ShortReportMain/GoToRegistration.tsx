@@ -19,7 +19,7 @@ function GoToRegistration() {
       </div>
       <div>
         <Title level={4}>
-          Зарегистрируйтесь и получите детальный план для вашего бизнеса
+          Зарегистрируйтесь и получите полный расчет затрат для вашего бизнеса
         </Title>
       </div>
       <div className="go_to_registration_button">

@@ -102,7 +102,7 @@ const StepFirst = ({
         </Col>
         <Col span={6}>
           <div className="step_first_text_plus_select">
-            <Text strong>Тип налогооблажения</Text>
+            <Text strong>Тип налогообложения</Text>
             <Select
               onChange={handleChangeTypeTax}
               value={taxId}
@@ -135,7 +135,7 @@ const StepFirst = ({
         <Col span={6}>
           <div className="step_first_checkbox">
             <Checkbox checked={checked} onChange={handleChangeCheckbox}>
-              Будем оформлять патент?
+              Оформить патент
             </Checkbox>
           </div>
         </Col>

@@ -97,7 +97,7 @@ const StepSecond = ({
           <Row>
             <Col span={20}>
               <div className="step_second_text_plus_select">
-                <Text strong>Где будем строить</Text>
+                <Text strong>Район Москвы</Text>
                 <Select
                   showSearch
                   placeholder="Начните печатать"
@@ -144,7 +144,7 @@ const StepSecond = ({
           <Row>
             <Col span={16}>
               <div className="step_second_text_plus_select">
-                <Text strong>Площадь объектов капитального переделывания</Text>
+                <Text strong>Площадь подлежащих ремонту объектов</Text>
                 <Input
                   onChange={handleChangeNumberRebuildObjects}
                   placeholder="Введите число в м2"

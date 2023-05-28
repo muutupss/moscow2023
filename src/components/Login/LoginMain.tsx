@@ -4,19 +4,22 @@ import { Button, Divider, Form, Input, Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { isUserInSystemLocalStorage } from '../../helper/auth-header';
+import {
+  isUserInSystemLocalStorage,
+  isAdminInSystemLocalStorage,
+} from '../../helper/auth-header';
 
 const { Text, Title } = Typography;
 
 const LoginMain = observer(() => {
   const { sharedStore } = useStore();
-  const { getLogin, doesUserInSystem, isUserAdmin } = sharedStore;
+  const { getLogin, doesUserInSystem } = sharedStore;
   const navigate = useNavigate();
   let location = useLocation();
 
   useEffect(() => {
     if (isUserInSystemLocalStorage()) {
-      if (isUserAdmin) {
+      if (isAdminInSystemLocalStorage()) {
         navigate('/admin');
       } else {
         navigate('/cabinet');
@@ -73,7 +76,7 @@ const LoginMain = observer(() => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Text strong>Email </Text>
+        <Text strong>Адрес электронной почты </Text>
         <Text strong style={{ color: 'red' }}>
           *
         </Text>
@@ -84,7 +87,7 @@ const LoginMain = observer(() => {
           <Input />
         </Form.Item>
 
-        <Text strong>Password </Text>
+        <Text strong>Пароль </Text>
         <Text strong style={{ color: 'red' }}>
           *
         </Text>

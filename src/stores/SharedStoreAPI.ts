@@ -71,7 +71,6 @@ export default class SharedStoreInfoAPI {
       body: JSON.stringify(mapCalculator)
   } as any;
 
-    //return this.myPromise
     return fetch(`${CURRENT_URL}/calculator`, requestOptions).then(this.handleResponse);
   }
 
@@ -81,7 +80,6 @@ export default class SharedStoreInfoAPI {
       headers: { ...authHeader(), 'Content-Type': 'application/json'},
   } as any;
 
-    //return this.myPromise
     return fetch(`${CURRENT_URL}/calculations/list`, requestOptions).then(this.handleResponse);
   }
 
@@ -91,15 +89,8 @@ export default class SharedStoreInfoAPI {
       headers: { ...authHeader(), 'Content-Type': 'application/json'},
   } as any;
 
-    //return this.myPromise
     return fetch(`${CURRENT_URL}/calculations/${id}`, requestOptions).then(this.handleResponse);
   }
-
-  myPromise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(this.data);
-    }, 300);
-  });
 
   data = {
     "personal_from" : 100,

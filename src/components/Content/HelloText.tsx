@@ -16,7 +16,7 @@ const HelloText = () => {
       </Title>
       <div className="hello_text_texts">
         <div>
-          <Text>Данный высокотехнологический сервис позволит качественно</Text>
+          <Text>Наш высокотехнологичный сервис позволит максимально точно</Text>
         </div>
         <div>
           <Text>

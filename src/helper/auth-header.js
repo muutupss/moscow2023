@@ -19,3 +19,13 @@ export function isUserInSystemLocalStorage() {
         return false;
     }
 }
+
+export function isAdminInSystemLocalStorage() {
+    let admin = JSON.parse(localStorage.getItem('admin'));
+
+    if (admin) {
+        return true
+    } else {
+        return false;
+    }
+}

@@ -22,7 +22,7 @@ const columns: ColumnsType<DataType> = [
     key: 'UpdatedAt',
   },
   {
-    title: 'Юзер ID',
+    title: 'User ID',
     dataIndex: 'UserID',
     key: 'UserID',
   },
@@ -32,12 +32,12 @@ const columns: ColumnsType<DataType> = [
     key: 'IndustryID',
   },
   {
-    title: 'Потенциальные траты, млн руб',
+    title: 'Потенциальные траты (млн руб)',
     dataIndex: 'ResultTo',
     key: 'ResultTo',
   },
   {
-    title: 'Action',
+    title: 'Действия',
     dataIndex: 'ReportLink',
     key: 'ReportLink',
     render: (text) => {
