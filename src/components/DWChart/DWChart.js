@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react'
+import './DWChart.css'
 
 export default function DWChart({ title, src, ...props }) {
   const iframeRef = useRef()
@@ -28,7 +29,7 @@ export default function DWChart({ title, src, ...props }) {
       ref={iframeRef}
       scrolling="no"
       frameBorder="0"
-      width="100%"
+      width="80%"
       {...props}
       title={title}
       src={src}

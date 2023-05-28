@@ -4,19 +4,6 @@ import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 import './StepFirst.css';
 
-const listOfTypeOrganization = [
-  { value: 'ИП', label: 'ИП' },
-  { value: 'АО', label: 'АО' },
-  { value: 'ОАО', label: 'ОАО' },
-  { value: 'Самозанятый', label: 'Самозанятый' },
-];
-
-const listOfTypeTaxes = [
-  { value: 'Налоги 1', label: 'Налоги 1' },
-  { value: 'Налоги 2', label: 'Налоги 2' },
-  { value: 'Налоги 3', label: 'Налоги 3' },
-];
-
 const { Text } = Typography;
 
 const StepFirst = ({

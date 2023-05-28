@@ -1,3 +1,7 @@
 .content_main {
-    margin-top: 20px;
+    margin-top: 40px;
+}
+
+.content__padding_center {
+    padding: 40px
 }

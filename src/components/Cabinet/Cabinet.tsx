@@ -8,13 +8,26 @@ import { useNavigate } from 'react-router-dom';
 const Cabinet = observer(() => {
   const navigate = useNavigate();
   const { sharedStore } = useStore();
-  const { doesUserInSystem } = sharedStore;
+  const { doesUserInSystem, getListCalculator, listCurrentCalculators } =
+    sharedStore;
 
   useEffect(() => {
     if (!doesUserInSystem) {
       navigate('/');
+    } else {
+      getListCalculator();
     }
   }, [doesUserInSystem]);
+
+  const handlelistCurrentCalculators = () => {
+    if (listCurrentCalculators.length !== 0) {
+      return listCurrentCalculators.map((value: any) => {
+        <CabinetCards options={value} />;
+      });
+    }
+    return <></>;
+  };
+
   return (
     <>
       <CabinetCards />

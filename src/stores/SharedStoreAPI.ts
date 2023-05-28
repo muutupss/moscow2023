@@ -1,4 +1,5 @@
-const CURRENT_URL = 'http://188.72.108.129:8080'
+import { authHeader } from '../helper/auth-header'
+const CURRENT_URL = 'http://94.139.252.175:8080'
 
 export default class SharedStoreInfoAPI {
   SFapi: any = {}
@@ -66,12 +67,22 @@ export default class SharedStoreInfoAPI {
   postCalculator = (mapCalculator: string) => {
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
+      headers: { ...authHeader(), 'Content-Type': 'application/json'},
       body: JSON.stringify(mapCalculator)
   } as any;
 
     //return this.myPromise
     return fetch(`${CURRENT_URL}/calculator`, requestOptions).then(this.handleResponse);
+  }
+
+  getListCalculator = () => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { ...authHeader(), 'Content-Type': 'application/json'},
+  } as any;
+
+    //return this.myPromise
+    return fetch(`${CURRENT_URL}/calculations/list`, requestOptions).then(this.handleResponse);
   }
 
   myPromise = new Promise((resolve, reject) => {

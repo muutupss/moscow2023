@@ -204,7 +204,9 @@ const StepSecond = ({
           </Row>
         </Col>
         <Col span={12}>
-          <DWChart title="Chart" src="//datawrapper.dwcdn.net/Wh8QV/1/" />
+          <div className="step_second_chart">
+            <DWChart title="Chart" src="//datawrapper.dwcdn.net/3uzOm/1/" />
+          </div>
         </Col>
       </Row>
     </>

@@ -24,6 +24,9 @@ export default class SharedStore {
     "buildings": [],
     "calculation_id": null
   }
+  listCurrentCalculators: any = []
+
+  doesUserUseCalculatorBeforeReg: boolean = false
 
   optionsForChart = {
     chart: {
@@ -115,7 +118,13 @@ export default class SharedStore {
     this.API.postRegistrationInfo(mapRegistation)
     .then((user: any) => {
       localStorage.setItem('user', JSON.stringify(user));
-      this.doesUserInSystem = true;
+      if (this.doesUserUseCalculatorBeforeReg) {
+        this.postCalculator().then(() => {
+          this.doesUserInSystem = true;
+        })
+      } else {
+        this.doesUserInSystem = true;
+      }
       console.log(JSON.stringify(user))
     }
     ).catch((error: any) => {
@@ -149,6 +158,7 @@ export default class SharedStore {
       this.optionsForChart.series[0].data[3].y = (result.result.service_to / result.result.total_to) * 100
       this.currentResultsTotal.total_from = result.result.total_from
       this.currentResultsTotal.total_to = result.result.total_to
+      this.doesUserUseCalculatorBeforeReg = true
     }).catch((error: any) => {
       console.log(JSON.stringify(error))
     })
@@ -159,6 +169,16 @@ export default class SharedStore {
       localStorage.setItem('user', JSON.stringify(user));
       this.doesUserInSystem = true;
       console.log(JSON.stringify(user))
+    }
+    ).catch((error: any) => {
+      console.log(JSON.stringify(error))
+    })
+  }
+
+  getListCalculator = () => {
+    this.API.getListCalculator().then((result: any) => {
+      this.listCurrentCalculators = result
+      console.log(JSON.stringify(result), 'result getListCalculator')
     }
     ).catch((error: any) => {
       console.log(JSON.stringify(error))

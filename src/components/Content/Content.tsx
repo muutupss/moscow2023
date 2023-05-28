@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Steps, message } from 'antd';
+import { Button, Steps, message, Typography, Divider } from 'antd';
 import StepFirst from '../Steps/StepFirst';
 import StepSecond from '../Steps/StepSecond';
 import StepThird from '../Steps/StepThird';
@@ -9,6 +9,8 @@ import { useStore } from '../../hooks/use-store';
 
 import './Content.css';
 import { useNavigate } from 'react-router-dom';
+
+const { Title } = Typography;
 
 const steps = [
   {
@@ -73,56 +75,66 @@ const Content = observer(() => {
 
   return (
     <div>
-      <Steps current={current} items={items} />
-      <div className="content_main">
-        {current === 0 && (
-          <StepFirst
-            industries={industries}
-            patents={patents}
-            registrationForms={registrationForms}
-            taxForms={taxForms}
-            workerCount={currentStepValues['worker_count']}
-            industryId={currentStepValues['industry_id']}
-            registrationId={currentStepValues['registration_id']}
-            taxId={currentStepValues['tax_id']}
-            patentId={currentStepValues['patent_id']}
-            changeCurrentStepValues={changeCurrentStepValues}
-          />
-        )}
-        {current === 1 && (
-          <StepSecond
-            districts={districts}
-            landArea={currentStepValues['land_area']}
-            districtId={currentStepValues['district_id']}
-            capBuildingArea={currentStepValues['cap_building_area']}
-            capReBuildingArea={currentStepValues['cap_rebuilding_area']}
-            buildings={currentStepValues['buildings']}
-            changeCurrentStepValues={changeCurrentStepValues}
-          />
-        )}
-        {current === 2 && (
-          <StepThird
-            equipments={currentStepValues['equipments']}
-            changeCurrentStepValues={changeCurrentStepValues}
-          />
-        )}
-      </div>
-      <div style={{ marginTop: 24 }}>
-        {current < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
-            Next
-          </Button>
-        )}
-        {current === steps.length - 1 && (
-          <Button type="primary" onClick={handleDoneButton}>
-            Done
-          </Button>
-        )}
-        {current > 0 && (
-          <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-            Previous
-          </Button>
-        )}
+      <Title
+        style={{ marginTop: '20px', marginBottom: '35px', textAlign: 'center' }}
+        level={4}
+      >
+        Ответьте на следующие вопросы и умный сервис рассчитает необходимые
+        вложения
+      </Title>
+      <Divider />
+      <div className="content__padding_center">
+        <Steps current={current} items={items} />
+        <div className="content_main">
+          {current === 0 && (
+            <StepFirst
+              industries={industries}
+              patents={patents}
+              registrationForms={registrationForms}
+              taxForms={taxForms}
+              workerCount={currentStepValues['worker_count']}
+              industryId={currentStepValues['industry_id']}
+              registrationId={currentStepValues['registration_id']}
+              taxId={currentStepValues['tax_id']}
+              patentId={currentStepValues['patent_id']}
+              changeCurrentStepValues={changeCurrentStepValues}
+            />
+          )}
+          {current === 1 && (
+            <StepSecond
+              districts={districts}
+              landArea={currentStepValues['land_area']}
+              districtId={currentStepValues['district_id']}
+              capBuildingArea={currentStepValues['cap_building_area']}
+              capReBuildingArea={currentStepValues['cap_rebuilding_area']}
+              buildings={currentStepValues['buildings']}
+              changeCurrentStepValues={changeCurrentStepValues}
+            />
+          )}
+          {current === 2 && (
+            <StepThird
+              equipments={currentStepValues['equipments']}
+              changeCurrentStepValues={changeCurrentStepValues}
+            />
+          )}
+        </div>
+        <div style={{ marginTop: 24 }}>
+          {current < steps.length - 1 && (
+            <Button type="primary" onClick={() => next()}>
+              Next
+            </Button>
+          )}
+          {current === steps.length - 1 && (
+            <Button type="primary" onClick={handleDoneButton}>
+              Done
+            </Button>
+          )}
+          {current > 0 && (
+            <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
+              Previous
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
