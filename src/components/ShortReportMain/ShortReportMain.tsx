@@ -38,7 +38,11 @@ const ShortReportMain = observer(() => {
       </div>
       {isUserInSystemLocalStorage() && (
         <div className="short_report_button">
-          <Button danger>Скачать отчет</Button>
+          <Button danger>
+            <a href={currentResultsTotal.report_link} target="_blank">
+              Скачать отчет
+            </a>
+          </Button>
         </div>
       )}
     </div>

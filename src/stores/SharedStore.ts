@@ -126,6 +126,7 @@ export default class SharedStore {
       } else {
         this.doesUserInSystem = true;
       }
+      this.doesUserUseCalculatorBeforeReg = false;
       console.log(JSON.stringify(user))
     }
     ).catch((error: any) => {
@@ -153,12 +154,14 @@ export default class SharedStore {
     }
     console.log(JSON.stringify(mapCalculator))
     return this.API.postCalculator(mapCalculator).then((result: any) => {
+      console.log(result)
       this.optionsForChart.series[0].data[0].y = (result.result.personal_to / result.result.total_to) * 100
       this.optionsForChart.series[0].data[1].y = (result.result.estate_to / result.result.total_to) * 100
       this.optionsForChart.series[0].data[2].y = (result.result.tax_to / result.result.total_to) * 100
       this.optionsForChart.series[0].data[3].y = (result.result.service_to / result.result.total_to) * 100
       this.currentResultsTotal.total_from = result.result.total_from
       this.currentResultsTotal.total_to = result.result.total_to
+      this.currentResultsTotal.report_link = result.result.report_link
       this.doesUserUseCalculatorBeforeReg = true
     }).catch((error: any) => {
       console.log(JSON.stringify(error))
@@ -179,7 +182,7 @@ export default class SharedStore {
 
   getListCalculator = () => {
     this.API.getListCalculator().then((result: any) => {
-      this.listCurrentCalculators = result
+      this.listCurrentCalculators = result.calculations
       console.log(JSON.stringify(result), 'result getListCalculator')
     }
     ).catch((error: any) => {

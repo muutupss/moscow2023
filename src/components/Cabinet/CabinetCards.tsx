@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Typography } from 'antd';
 
 import './CabinetCards.css';
@@ -6,7 +6,18 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 
-const CabinetCards = ({ options }: any) => {
+const CabinetCards = ({ options, industries }: any) => {
+  const [industry, setIndustry] = useState('');
+
+  useEffect(() => {
+    if (industries.length !== 0) {
+      const currentInd = industries.find(
+        (value: any) => options.IndustryID === value.id,
+      ).value;
+      setIndustry(currentInd);
+    }
+  }, [industries.length]);
+
   return (
     <div>
       <div className="cabinet_card">
@@ -17,7 +28,7 @@ const CabinetCards = ({ options }: any) => {
                 <Title level={4}>Дата создания отчета: </Title>
               </div>
               <div className="cabinet_text__margin">
-                <Title level={4}>30.06.2029</Title>
+                <Title level={4}>{options.UpdatedAt}</Title>
               </div>
             </div>
             <div className="cabinet_title_plus_text">
@@ -25,7 +36,7 @@ const CabinetCards = ({ options }: any) => {
                 <Title level={4}>Отрасль: </Title>
               </div>
               <div className="cabinet_text__margin">
-                <Title level={4}>Сельское хозяйство</Title>
+                <Title level={4}>{industry}</Title>
               </div>
             </div>
             <div className="cabinet_title_plus_text">
@@ -33,7 +44,9 @@ const CabinetCards = ({ options }: any) => {
                 <Title level={4}>Сумма ваших вложений: </Title>
               </div>
               <div className="cabinet_text__margin">
-                <Title level={4}>100 000 — 200 000 рублей</Title>
+                <Title level={4}>
+                  {options.ResultFrom} — {options.ResultTo} рублей
+                </Title>
               </div>
             </div>
           </div>
@@ -43,7 +56,11 @@ const CabinetCards = ({ options }: any) => {
           </div>
         </div>
         <div className="cabinet_button">
-          <Button danger>Скачать отчет</Button>
+          <Button danger>
+            <a href={options.ReportLink} target="_blank">
+              Скачать отчет
+            </a>
+          </Button>
         </div>
       </div>
     </div>

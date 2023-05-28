@@ -31,7 +31,7 @@ const RegistrationMain = observer(() => {
     if (isUserInSystemLocalStorage()) {
       navigate('/cabinet');
     }
-  }, []);
+  }, [doesUserInSystem]);
 
   const onFinish = (values: any) => {
     postRegistrationInfo(values);

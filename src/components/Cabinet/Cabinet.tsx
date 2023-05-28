@@ -4,38 +4,46 @@ import CabinetCards from './CabinetCards';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
 import { useNavigate } from 'react-router-dom';
+import { isUserInSystemLocalStorage } from '../../helper/auth-header';
 
 const Cabinet = observer(() => {
   const navigate = useNavigate();
   const { sharedStore } = useStore();
-  const { doesUserInSystem, getListCalculator, listCurrentCalculators } =
-    sharedStore;
+  const {
+    doesUserInSystem,
+    getListCalculator,
+    getIndustries,
+    listCurrentCalculators,
+    industries,
+  } = sharedStore;
 
   useEffect(() => {
-    if (!doesUserInSystem) {
+    if (!isUserInSystemLocalStorage()) {
       navigate('/');
     } else {
       getListCalculator();
+      getIndustries();
     }
   }, [doesUserInSystem]);
 
-  const handlelistCurrentCalculators = () => {
-    if (listCurrentCalculators.length !== 0) {
-      return listCurrentCalculators.map((value: any) => {
-        <CabinetCards options={value} />;
+  const handlelistCurrentCalculators = (list: any) => {
+    if (list.length !== 0) {
+      return list.map((value: any) => {
+        return (
+          <CabinetCards
+            key={value.ID}
+            options={value}
+            industries={industries}
+          />
+        );
       });
     }
-    return <></>;
+    return <div>Никаких расчетов пока что нет</div>;
   };
 
   return (
     <div className="cabinet__margin">
-      <CabinetCards />
-      <CabinetCards />
-      <CabinetCards />
-      <CabinetCards />
-      <CabinetCards />
-      <CabinetCards />
+      {handlelistCurrentCalculators(listCurrentCalculators)}
     </div>
   );
 });
