@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Typography } from 'antd';
 
 import './CabinetCards.css';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 
@@ -57,13 +57,6 @@ const CabinetCards = ({ options, industries, deleteCard }: any) => {
             </div>
           </div>
           <div>
-            <EditOutlined
-              style={{
-                fontSize: '20px',
-                marginRight: '20px',
-                cursor: 'pointer',
-              }}
-            />
             <DeleteOutlined
               onClick={() => deleteCard(options.ID)}
               style={{ fontSize: '20px', cursor: 'pointer' }}

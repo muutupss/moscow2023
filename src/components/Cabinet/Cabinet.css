@@ -1,3 +1,7 @@
 .cabinet__margin {
     margin: 40px
 }
+
+.cabinet_none {
+    text-align: center;
+}

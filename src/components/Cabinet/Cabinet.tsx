@@ -5,6 +5,9 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
 import { useNavigate } from 'react-router-dom';
 import { isUserInSystemLocalStorage } from '../../helper/auth-header';
+import { Typography } from 'antd';
+
+const { Title, Text } = Typography;
 
 const Cabinet = observer(() => {
   const navigate = useNavigate();
@@ -40,7 +43,16 @@ const Cabinet = observer(() => {
         );
       });
     }
-    return <div>Никаких расчетов пока что нет</div>;
+    return (
+      <div className="cabinet_none">
+        <Title style={{ margin: 0 }} level={2}>
+          Данных пока нет{' '}
+        </Title>
+        <Title style={{ margin: 0 }} level={2}>
+          (Здесь будут находиться ваши отчеты)
+        </Title>
+      </div>
+    );
   };
 
   return (
