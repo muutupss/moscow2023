@@ -134,6 +134,14 @@ export default class SharedStore {
     })
   }
 
+  deleteCard = (id: string) => {
+    this.API.deleteCard(id).then(() => {
+      this.getListCalculator();
+    }).catch((error: any) => {
+      console.log(JSON.stringify(error))
+    })
+  }
+
   postCalculator = () => {
     console.log(JSON.stringify(this.currentStepValues))
     let mapCalculator = {...this.currentStepValues}

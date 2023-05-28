@@ -6,14 +6,20 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 
-const CabinetCards = ({ options, industries }: any) => {
+const CabinetCards = ({ options, industries, deleteCard }: any) => {
   const [industry, setIndustry] = useState('');
 
   useEffect(() => {
     if (industries.length !== 0) {
-      const currentInd = industries.find(
+      let currentInd = industries.find(
         (value: any) => options.IndustryID === value.id,
-      ).value;
+      );
+      if (currentInd?.value) {
+        currentInd = currentInd?.value;
+      }
+      if (currentInd?.name) {
+        currentInd = currentInd?.name;
+      }
       setIndustry(currentInd);
     }
   }, [industries.length]);
@@ -51,8 +57,17 @@ const CabinetCards = ({ options, industries }: any) => {
             </div>
           </div>
           <div>
-            <EditOutlined style={{ fontSize: '20px', marginRight: '20px' }} />
-            <DeleteOutlined style={{ fontSize: '20px' }} />
+            <EditOutlined
+              style={{
+                fontSize: '20px',
+                marginRight: '20px',
+                cursor: 'pointer',
+              }}
+            />
+            <DeleteOutlined
+              onClick={() => deleteCard(options.ID)}
+              style={{ fontSize: '20px', cursor: 'pointer' }}
+            />
           </div>
         </div>
         <div className="cabinet_button">

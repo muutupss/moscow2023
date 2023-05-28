@@ -13,6 +13,7 @@ const Cabinet = observer(() => {
     doesUserInSystem,
     getListCalculator,
     getIndustries,
+    deleteCard,
     listCurrentCalculators,
     industries,
   } = sharedStore;
@@ -34,6 +35,7 @@ const Cabinet = observer(() => {
             key={value.ID}
             options={value}
             industries={industries}
+            deleteCard={deleteCard}
           />
         );
       });

@@ -85,6 +85,16 @@ export default class SharedStoreInfoAPI {
     return fetch(`${CURRENT_URL}/calculations/list`, requestOptions).then(this.handleResponse);
   }
 
+  deleteCard = (id: string) => {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { ...authHeader(), 'Content-Type': 'application/json'},
+  } as any;
+
+    //return this.myPromise
+    return fetch(`${CURRENT_URL}/calculations/${id}`, requestOptions).then(this.handleResponse);
+  }
+
   myPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(this.data);

@@ -100,7 +100,9 @@ const Header = observer(() => {
   const handleProfileIcon = () => {
     return isUserInSystemLocalStorage() ? (
       <Dropdown menu={{ items, onClick }} placement="bottomLeft">
-        <UserOutlined style={{ fontSize: '32px', color: 'red' }} />
+        <UserOutlined
+          style={{ fontSize: '32px', color: 'red', cursor: 'pointer' }}
+        />
       </Dropdown>
     ) : (
       <></>
