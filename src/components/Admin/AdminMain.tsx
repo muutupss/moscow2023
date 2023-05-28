@@ -32,7 +32,7 @@ const columns: ColumnsType<DataType> = [
     key: 'IndustryID',
   },
   {
-    title: 'Потенциальные траты',
+    title: 'Потенциальные траты, млн руб',
     dataIndex: 'ResultTo',
     key: 'ResultTo',
   },
@@ -55,18 +55,58 @@ const columns: ColumnsType<DataType> = [
 const AdminMain = observer(() => {
   const navigate = useNavigate();
   const { sharedStore } = useStore();
-  const { getListCalculator, doesUserInSystem, listCurrentCalculators } =
-    sharedStore;
+  const {
+    getListCalculator,
+    getIndustries,
+    doesUserInSystem,
+    listCurrentCalculators,
+    industries,
+  } = sharedStore;
 
   useEffect(() => {
     if (!isUserInSystemLocalStorage()) {
       navigate('/');
     } else {
+      getIndustries();
       getListCalculator();
     }
   }, [doesUserInSystem]);
 
-  return <Table columns={columns} dataSource={listCurrentCalculators} />;
+  const handleMappingList = (list: any) => {
+    if (industries.length !== 0 && listCurrentCalculators !== 0) {
+      let mapping = [...list];
+      mapping = mapping.map((value: any) => {
+        let currentValue = { ...value };
+        const dataValue = new Date(currentValue.UpdatedAt);
+        currentValue.UpdatedAt = `${dataValue.toLocaleTimeString(
+          'en-GB',
+        )} ${dataValue.toLocaleDateString('en-GB')}`;
+        currentValue.ResultTo =
+          Math.trunc(parseInt(currentValue.ResultTo) / 10000) / 100;
+
+        let currentInd = industries.find(
+          (value: any) => currentValue.IndustryID === value.id,
+        );
+        if (currentInd?.value) {
+          currentInd = currentInd?.value;
+        }
+        if (currentInd?.name) {
+          currentInd = currentInd?.name;
+        }
+        currentValue.IndustryID = currentInd;
+        return currentValue;
+      });
+      return mapping;
+    }
+    return [];
+  };
+
+  return (
+    <Table
+      columns={columns}
+      dataSource={handleMappingList(listCurrentCalculators)}
+    />
+  );
 });
 
 export default AdminMain;
