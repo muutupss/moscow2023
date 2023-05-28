@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../assets/img/logo.jpg';
+import logoFirst from '../../assets/img/Logo.svg';
 import { Button, Dropdown, MenuProps, Space } from 'antd';
 import './Header.css';
 import { useLocation, useNavigate, NavLink } from 'react-router-dom';
@@ -103,7 +103,7 @@ const Header = observer(() => {
     <div className="header_content">
       <div>
         <NavLink to="/">
-          <img src={logo} alt="Logo" />
+          <img src={logoFirst} alt="Logo" />
         </NavLink>
       </div>
       <div className="header_buttons">
