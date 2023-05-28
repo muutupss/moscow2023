@@ -14,7 +14,7 @@ const { Title } = Typography;
 
 const steps = [
   {
-    title: 'Бугалтерия',
+    title: 'Бухгалтерия',
   },
   {
     title: 'Производство',
