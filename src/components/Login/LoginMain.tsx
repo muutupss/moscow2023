@@ -4,6 +4,7 @@ import { Button, Divider, Form, Input, Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { isUserInSystemLocalStorage } from '../../helper/auth-header';
 
 const { Text, Title } = Typography;
 
@@ -14,7 +15,7 @@ const LoginMain = observer(() => {
   let location = useLocation();
 
   useEffect(() => {
-    if (doesUserInSystem) {
+    if (isUserInSystemLocalStorage()) {
       if (isUserAdmin) {
         navigate('/admin');
       } else {

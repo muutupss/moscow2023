@@ -6,6 +6,7 @@ import { useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
+import { isUserInSystemLocalStorage } from '../../helper/auth-header';
 
 const items: MenuProps['items'] = [
   {
@@ -26,7 +27,7 @@ const Header = observer(() => {
   let location = useLocation();
   const navigate = useNavigate();
   const { sharedStore } = useStore();
-  const { logout, isUserAdmin, doesUserInSystem } = sharedStore;
+  const { logout, isUserAdmin } = sharedStore;
 
   const handleClickRegistationButton = () => {
     navigate('/registration');
@@ -63,7 +64,7 @@ const Header = observer(() => {
   const handleLoginButton = () => {
     return location.pathname !== '/login' &&
       location.pathname !== '/adminlogin' &&
-      !doesUserInSystem ? (
+      !isUserInSystemLocalStorage() ? (
       <Button danger onClick={handleClickLoginButton}>
         Войти
       </Button>
@@ -75,7 +76,7 @@ const Header = observer(() => {
   const handleRegistationButton = () => {
     return location.pathname !== '/registration' &&
       location.pathname !== '/adminlogin' &&
-      !doesUserInSystem ? (
+      !isUserInSystemLocalStorage() ? (
       <Button type="primary" danger onClick={handleClickRegistationButton}>
         Регистрация
       </Button>
@@ -85,7 +86,7 @@ const Header = observer(() => {
   };
 
   const handleAppFormButton = () => {
-    return doesUserInSystem ? (
+    return isUserInSystemLocalStorage() ? (
       <div className="header_calculate__margin">
         <Button type="primary" danger onClick={handleClickAppFormButton}>
           Рассчитать вложения
@@ -97,7 +98,7 @@ const Header = observer(() => {
   };
 
   const handleProfileIcon = () => {
-    return doesUserInSystem ? (
+    return isUserInSystemLocalStorage() ? (
       <Dropdown menu={{ items, onClick }} placement="bottomLeft">
         <UserOutlined style={{ fontSize: '32px', color: 'red' }} />
       </Dropdown>

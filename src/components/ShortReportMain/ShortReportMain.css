@@ -10,3 +10,8 @@
 .short_report__padding_center{
   padding: 40px
 }
+
+.short_report_button {
+  display: flex;
+  justify-content: flex-end;
+}

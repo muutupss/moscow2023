@@ -14,6 +14,7 @@ import {
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
 import { useNavigate } from 'react-router-dom';
+import { isUserInSystemLocalStorage } from '../../helper/auth-header';
 
 const { Text, Title } = Typography;
 
@@ -27,13 +28,10 @@ const RegistrationMain = observer(() => {
     if (industries.length === 0) {
       getIndustries();
     }
-  }, []);
-
-  useEffect(() => {
-    if (doesUserInSystem) {
+    if (isUserInSystemLocalStorage()) {
       navigate('/cabinet');
     }
-  }, [doesUserInSystem]);
+  }, []);
 
   const onFinish = (values: any) => {
     postRegistrationInfo(values);

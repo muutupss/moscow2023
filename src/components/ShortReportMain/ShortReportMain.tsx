@@ -1,10 +1,11 @@
 import React from 'react';
 import './ShortReportMain.css';
-import { Divider, Typography } from 'antd';
+import { Button, Divider, Typography } from 'antd';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
+import { isUserInSystemLocalStorage } from '../../helper/auth-header';
 
 const { Title } = Typography;
 
@@ -35,6 +36,11 @@ const ShortReportMain = observer(() => {
           <HighchartsReact highcharts={Highcharts} options={optionsForChart} />
         </div>
       </div>
+      {isUserInSystemLocalStorage() && (
+        <div className="short_report_button">
+          <Button danger>Скачать отчет</Button>
+        </div>
+      )}
     </div>
   );
 });
