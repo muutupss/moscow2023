@@ -195,11 +195,11 @@ export default class SharedStore {
   resetCurrentStepValues = () => {
     this.currentStepValues = {
       "industry_id" : null,
-      "worker_count": null,
+      "worker_count": 0,
       "district_id": null,
-      "land_area": null,
-      "cap_building_area": null,
-      "cap_rebuilding_area": null,
+      "land_area": 0,
+      "cap_building_area": 0,
+      "cap_rebuilding_area": 0,
       "registration_id": null,
       "tax_id": null,
       "patent_id": null,
