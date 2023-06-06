@@ -37,12 +37,14 @@ const Content = observer(() => {
     changeCurrentStepValues,
     getRegtax,
     postCalculator,
+    getEquipments,
     industries,
     patents,
     districts,
     currentStepValues,
     registrationForms,
     taxForms,
+    equipmentsList,
   } = sharedStore;
 
   useEffect(() => {
@@ -57,6 +59,9 @@ const Content = observer(() => {
     }
     if (taxForms.length === 0 || registrationForms.length === 0) {
       getRegtax();
+    }
+    if (equipmentsList.length === 0) {
+      getEquipments();
     }
   }, []);
 
@@ -120,6 +125,7 @@ const Content = observer(() => {
           {current === 2 && (
             <StepThird
               equipments={currentStepValues['equipments']}
+              equipmentsList={equipmentsList}
               changeCurrentStepValues={changeCurrentStepValues}
             />
           )}

@@ -1,19 +1,38 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Input, List, Row, Typography, message } from 'antd';
+import {
+  AutoComplete,
+  Button,
+  Col,
+  Input,
+  List,
+  Row,
+  Typography,
+  message,
+} from 'antd';
 import React, { useState } from 'react';
 
 const { Text } = Typography;
 
-const StepThird = ({ changeCurrentStepValues, equipments }: any) => {
+const StepThird = ({
+  changeCurrentStepValues,
+  equipments,
+  equipmentsList,
+}: any) => {
   const [valueSpecificObjects, setvalueSpecificObjects] = useState('');
   const [valueSpecificObjectsCost, setvalueSpecificObjectsCost] = useState(0);
   const [valueSpecificObjectsSum, setvalueSpecificObjectsSum] = useState(0);
 
-  const handleChangeSpecificObjects = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const { value: inputValue } = e.target;
+  const handleChangeSpecificObjects = (inputValue: string) => {
     setvalueSpecificObjects(inputValue);
+    const findItem = equipmentsList.find(
+      (value: any) => value.name === inputValue,
+    );
+    if (findItem && findItem?.price_rub) {
+      setvalueSpecificObjectsCost(
+        Math.trunc(parseInt(findItem?.price_rub) / 1000),
+      );
+      setvalueSpecificObjectsSum(1);
+    }
   };
 
   const handleChangeSpecificObjectsCost = (
@@ -22,7 +41,7 @@ const StepThird = ({ changeCurrentStepValues, equipments }: any) => {
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      setvalueSpecificObjectsCost(parseInt(inputValue));
+      setvalueSpecificObjectsCost(inputValue ? parseInt(inputValue) : 0);
     }
   };
 
@@ -32,7 +51,7 @@ const StepThird = ({ changeCurrentStepValues, equipments }: any) => {
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      setvalueSpecificObjectsSum(parseInt(inputValue));
+      setvalueSpecificObjectsSum(inputValue ? parseInt(inputValue) : 0);
     }
   };
 
@@ -61,10 +80,20 @@ const StepThird = ({ changeCurrentStepValues, equipments }: any) => {
         <Col span={14}>
           <div className="step_second_text_plus_select">
             <Text strong>Оборудование/иные затраты</Text>
-            <Input
+            <AutoComplete
+              options={equipmentsList.map((value: any) => {
+                return {
+                  value: value.name,
+                };
+              })}
               onChange={handleChangeSpecificObjects}
               placeholder="Название оборубования/объекта"
-              value={valueSpecificObjects}
+              value={valueSpecificObjects as any}
+              filterOption={(inputValue, option: any) =>
+                option!.value
+                  .toUpperCase()
+                  .indexOf(inputValue.toUpperCase()) !== -1
+              }
             />
           </div>
         </Col>

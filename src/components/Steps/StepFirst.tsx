@@ -164,7 +164,7 @@ const StepFirst = ({
       setChecked(true);
     } else {
       setChecked(false);
-      changeCurrentStepValues('patent_id', '');
+      changeCurrentStepValues('patent_id', null);
     }
     if (
       (parseInt(workerCount) > PATENTCOUNT || registrationId !== IP) &&

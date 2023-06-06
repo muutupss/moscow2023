@@ -11,11 +11,11 @@ export default class SharedStore {
   doesUserInSystem: boolean = false
   currentStepValues: any = {
     "industry_id" : null,
-    "worker_count": null,
+    "worker_count": 0,
     "district_id": null,
-    "land_area": null,
-    "cap_building_area": null,
-    "cap_rebuilding_area": null,
+    "land_area": 0,
+    "cap_building_area": 0,
+    "cap_rebuilding_area": 0,
     "registration_id": null,
     "tax_id": null,
     "patent_id": null,
@@ -25,6 +25,7 @@ export default class SharedStore {
     "calculation_id": null
   }
   listCurrentCalculators: any = []
+  equipmentsList: any = []
 
   doesUserUseCalculatorBeforeReg: boolean = false
 
@@ -213,6 +214,16 @@ export default class SharedStore {
     this.API.getListCalculator().then((result: any) => {
       this.listCurrentCalculators = result.calculations
       console.log(JSON.stringify(result), 'result getListCalculator')
+    }
+    ).catch((error: any) => {
+      console.log(JSON.stringify(error))
+    })
+  }
+
+  getEquipments = () => {
+    this.API.getEquipments().then((result: any) => {
+      this.equipmentsList = result.equipments
+      console.log(JSON.stringify(result), 'result getEquipments')
     }
     ).catch((error: any) => {
       console.log(JSON.stringify(error))
