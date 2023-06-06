@@ -26,6 +26,7 @@ const steps = [
 
 const Content = observer(() => {
   const [current, setCurrent] = useState(0);
+  const [isDisable, setIsDisable] = useState(false);
   const navigate = useNavigate();
 
   const { sharedStore } = useStore();
@@ -73,6 +74,10 @@ const Content = observer(() => {
     postCalculator().then(() => navigate('/shortreport'));
   };
 
+  const changeDisableButton = (value: boolean) => {
+    setIsDisable(value);
+  };
+
   return (
     <div>
       <Title
@@ -98,6 +103,7 @@ const Content = observer(() => {
               taxId={currentStepValues['tax_id']}
               patentId={currentStepValues['patent_id']}
               changeCurrentStepValues={changeCurrentStepValues}
+              changeDisableButton={changeDisableButton}
             />
           )}
           {current === 1 && (
@@ -120,7 +126,7 @@ const Content = observer(() => {
         </div>
         <div style={{ marginTop: 24 }}>
           {current < steps.length - 1 && (
-            <Button type="primary" onClick={() => next()}>
+            <Button disabled={isDisable} type="primary" onClick={() => next()}>
               Далее
             </Button>
           )}

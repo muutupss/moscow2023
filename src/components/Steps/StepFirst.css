@@ -7,3 +7,14 @@
 .step_first_checkbox {
   margin-top: 26px;
 }
+
+.step_first_text_plus_popover {
+  display: flex;
+  flex-direction: row;
+}
+
+.step_first_text_plus_popover_icon {
+  margin-left: 5px;
+  margin-top: 3px;
+  color: #00000073;
+}
