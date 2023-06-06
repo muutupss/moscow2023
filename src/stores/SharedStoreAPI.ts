@@ -64,6 +64,15 @@ export default class SharedStoreInfoAPI {
     return fetch(`${CURRENT_URL}/regtax`, requestOptions).then(this.handleResponse);
   }
 
+  getEquipments = () => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json'},
+  } as any;
+
+    return fetch(`${CURRENT_URL}/equipments`, requestOptions).then(this.handleResponse);
+  }
+
   postCalculator = (mapCalculator: string) => {
     const requestOptions = {
       method: 'POST',
@@ -90,19 +99,6 @@ export default class SharedStoreInfoAPI {
   } as any;
 
     return fetch(`${CURRENT_URL}/calculations/${id}`, requestOptions).then(this.handleResponse);
-  }
-
-  data = {
-    "personal_from" : 100,
-    "personal_to": 200,
-    "estate_from": 100,
-    "estate_to": 300,
-    "tax_from": 100,
-    "tax_to": 400,
-    "service_from": 10,
-    "service_to": 50,
-    "total_from": 600,
-    "total_to": 950,
   }
 
   handleResponse(response : any) {
