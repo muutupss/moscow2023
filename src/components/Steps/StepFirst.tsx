@@ -135,7 +135,10 @@ const StepFirst = ({
       } else {
         setStatusTaxType('');
       }
-      changeCurrentStepValues('worker_count', parseInt(inputValue));
+      changeCurrentStepValues(
+        'worker_count',
+        inputValue ? parseInt(inputValue) : 0,
+      );
     }
   };
 

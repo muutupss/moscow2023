@@ -36,7 +36,14 @@ const StepSecond = ({
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      changeCurrentStepValues('land_area', parseInt(inputValue));
+      if (isNaN(parseInt(inputValue))) {
+        changeCurrentStepValues('land_area', 0);
+      } else {
+        changeCurrentStepValues(
+          'land_area',
+          inputValue ? parseInt(inputValue) : 0,
+        );
+      }
     }
   };
 
@@ -46,7 +53,26 @@ const StepSecond = ({
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      changeCurrentStepValues('cap_building_area', parseInt(inputValue));
+      if (isNaN(parseInt(inputValue))) {
+        changeCurrentStepValues('cap_building_area', 0);
+      } else {
+        if (
+          parseInt(landArea) >=
+          parseInt(capReBuildingArea) + parseInt(inputValue)
+        ) {
+          changeCurrentStepValues(
+            'cap_building_area',
+            inputValue ? parseInt(inputValue) : 0,
+          );
+        } else {
+          changeCurrentStepValues(
+            'cap_building_area',
+            parseInt(landArea) - parseInt(capReBuildingArea)
+              ? parseInt(landArea) - parseInt(capReBuildingArea)
+              : 0,
+          );
+        }
+      }
     }
   };
 
@@ -56,7 +82,26 @@ const StepSecond = ({
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      changeCurrentStepValues('cap_rebuilding_area', parseInt(inputValue));
+      if (isNaN(parseInt(inputValue))) {
+        changeCurrentStepValues('cap_rebuilding_area', 0);
+      } else {
+        if (
+          parseInt(landArea) >=
+          parseInt(capBuildingArea) + parseInt(inputValue)
+        ) {
+          changeCurrentStepValues(
+            'cap_rebuilding_area',
+            inputValue ? parseInt(inputValue) : 0,
+          );
+        } else {
+          changeCurrentStepValues(
+            'cap_rebuilding_area',
+            parseInt(landArea) - parseInt(capBuildingArea)
+              ? parseInt(landArea) - parseInt(capBuildingArea)
+              : 0,
+          );
+        }
+      }
     }
   };
 
@@ -73,7 +118,7 @@ const StepSecond = ({
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if (reg.test(inputValue) || inputValue === '' || inputValue === '-') {
-      setvalueSpecificObjectsCost(parseInt(inputValue));
+      setvalueSpecificObjectsCost(inputValue ? parseInt(inputValue) : 0);
     }
   };
 
@@ -123,7 +168,7 @@ const StepSecond = ({
                   onChange={handleChangeNumberAll}
                   placeholder="Введите число в м2"
                   maxLength={16}
-                  value={landArea}
+                  value={landArea ? landArea : 0}
                 />
               </div>
             </Col>
@@ -136,7 +181,7 @@ const StepSecond = ({
                   onChange={handleChangeNumberObjects}
                   placeholder="Введите число в м2"
                   maxLength={16}
-                  value={capBuildingArea}
+                  value={capBuildingArea ? capBuildingArea : 0}
                 />
               </div>
             </Col>
@@ -149,7 +194,7 @@ const StepSecond = ({
                   onChange={handleChangeNumberRebuildObjects}
                   placeholder="Введите число в м2"
                   maxLength={16}
-                  value={capReBuildingArea}
+                  value={capReBuildingArea ? capReBuildingArea : 0}
                 />
               </div>
             </Col>
