@@ -1,5 +1,5 @@
 import { authHeader } from '../helper/auth-header'
-const CURRENT_URL = 'http://127.0.0.1:8080'
+const CURRENT_URL = 'http://94.139.252.175:8080'
 
 export default class SharedStoreInfoAPI {
   SFapi: any = {}
