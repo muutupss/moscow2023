@@ -126,22 +126,24 @@ const StepThird = ({
           </div>
         </Col>
       </Row>
-      <Row>
-        <Col span={24}>
-          <List
-            itemLayout="horizontal"
-            dataSource={equipments}
-            renderItem={(item: any, index) => (
-              <List.Item>
-                <List.Item.Meta
-                  title={item?.name}
-                  description={`${item['price_rub']} рублей ${item?.count} шт`}
-                />
-              </List.Item>
-            )}
-          />
-        </Col>
-      </Row>
+      {equipments.length !== 0 && (
+        <Row>
+          <Col span={24}>
+            <List
+              itemLayout="horizontal"
+              dataSource={equipments}
+              renderItem={(item: any, index) => (
+                <List.Item>
+                  <List.Item.Meta
+                    title={item?.name}
+                    description={`${item['price_rub']} рублей ${item?.count} шт`}
+                  />
+                </List.Item>
+              )}
+            />
+          </Col>
+        </Row>
+      )}
     </>
   );
 };

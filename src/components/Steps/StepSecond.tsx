@@ -242,19 +242,23 @@ const StepSecond = ({
               </div>
             </Col>
           </Row>
-          <Row>
-            <Col span={24}>
-              <List
-                itemLayout="horizontal"
-                dataSource={buildings}
-                renderItem={(item: any, index) => (
-                  <List.Item>
-                    <List.Item.Meta title={`${item?.name} ${item?.area} м2`} />
-                  </List.Item>
-                )}
-              />
-            </Col>
-          </Row>
+          {buildings.length !== 0 && (
+            <Row>
+              <Col span={24}>
+                <List
+                  itemLayout="horizontal"
+                  dataSource={buildings}
+                  renderItem={(item: any, index) => (
+                    <List.Item>
+                      <List.Item.Meta
+                        title={`${item?.name} ${item?.area} м2`}
+                      />
+                    </List.Item>
+                  )}
+                />
+              </Col>
+            </Row>
+          )}
         </Col>
         <Col span={12}>
           <div className="step_second_chart">
