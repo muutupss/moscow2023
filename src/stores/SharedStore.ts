@@ -25,9 +25,60 @@ export default class SharedStore {
     "calculation_id": null
   }
   listCurrentCalculators: any = []
+  statsCurrentCalculators: any = []
   equipmentsList: any = []
 
   doesUserUseCalculatorBeforeReg: boolean = false
+
+  optionsForAdminChart = {
+    chart: {
+        type: 'spline'
+    },
+    title: {
+        text: 'График посещения пользователей'
+    },
+    xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: { // don't display the year
+            month: '%e. %b',
+            year: '%b'
+        },
+        title: {
+            text: ''
+        }
+    },
+    yAxis: {
+      title: {
+        text: ''
+    },
+        min: 0
+    },
+    tooltip: {
+        headerFormat: '<b>{series.name}</b><br>',
+        pointFormat: '{point.x:%e. %b}: {point.y}'
+    },
+
+    plotOptions: {
+        series: {
+            marker: {
+                enabled: true,
+                radius: 2.5
+            }
+        }
+    },
+
+    colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+
+    // Define the data points. All series have a year of 1970/71 in order
+    // to be compared on the same x axis. Note that in JavaScript, months start
+    // at 0 for January, 1 for February etc.
+    series: [
+        {
+            name: 'Количество посещений',
+            data: []
+        }
+    ]
+}
 
   optionsForChart = {
     chart: {
@@ -304,6 +355,24 @@ export default class SharedStore {
       label: regtaxValue.name
     })
     });
+    }).catch((error: any) => {
+      console.log(JSON.stringify(error))
+    })
+  }
+
+  getStatsCalculator = () => {
+    this.API.getStatsCalculator().then((result: any) => {
+      this.statsCurrentCalculators = result.stats;
+      const mapping = result.stats.map((value: any) => {
+        return [Date.parse(value['date']) , value['count']]
+      })
+      console.log('mapping', mapping)
+      this.optionsForAdminChart = {...this.optionsForAdminChart, series: [
+        {
+            name: 'Количество посещений',
+            data: mapping
+        }
+    ]}
     }).catch((error: any) => {
       console.log(JSON.stringify(error))
     })

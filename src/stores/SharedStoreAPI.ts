@@ -101,6 +101,15 @@ export default class SharedStoreInfoAPI {
     return fetch(`${CURRENT_URL}/calculations/${id}`, requestOptions).then(this.handleResponse);
   }
 
+  getStatsCalculator = () => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { ...authHeader(), 'Content-Type': 'application/json'},
+  } as any;
+
+    return fetch(`${CURRENT_URL}/calculations/stats`, requestOptions).then(this.handleResponse);
+  }
+
   handleResponse(response : any) {
     return response.text().then((text: any) => {
         const data = text && JSON.parse(text);

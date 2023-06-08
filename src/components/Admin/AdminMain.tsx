@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/use-store';
 import { isUserInSystemLocalStorage } from '../../helper/auth-header';
 import { useNavigate } from 'react-router-dom';
+import AdminChart from './AdminChart';
 
 interface DataType {
   key: string;
@@ -58,9 +59,12 @@ const AdminMain = observer(() => {
   const {
     getListCalculator,
     getIndustries,
+    getStatsCalculator,
     doesUserInSystem,
     listCurrentCalculators,
     industries,
+    statsCurrentCalculators,
+    optionsForAdminChart,
   } = sharedStore;
 
   useEffect(() => {
@@ -69,6 +73,7 @@ const AdminMain = observer(() => {
     } else {
       getIndustries();
       getListCalculator();
+      getStatsCalculator();
     }
   }, [doesUserInSystem]);
 
@@ -102,10 +107,13 @@ const AdminMain = observer(() => {
   };
 
   return (
-    <Table
-      columns={columns}
-      dataSource={handleMappingList(listCurrentCalculators)}
-    />
+    <>
+      <AdminChart optionsForChart={optionsForAdminChart} />
+      <Table
+        columns={columns}
+        dataSource={handleMappingList(listCurrentCalculators)}
+      />
+    </>
   );
 });
 
