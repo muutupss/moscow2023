@@ -161,9 +161,11 @@ const StepSecond = ({
             </Col>
           </Row>
           <Row>
-            <Col span={16}>
+            <Col span={20}>
               <div className="step_second_text_plus_select">
-                <Text strong>Площадь земельного участка</Text>
+                <Text strong>
+                  Площадь земельного участка, м<sup>2</sup>
+                </Text>
                 <Input
                   onChange={handleChangeNumberAll}
                   placeholder="Введите число в м2"
@@ -174,9 +176,11 @@ const StepSecond = ({
             </Col>
           </Row>
           <Row>
-            <Col span={16}>
+            <Col span={20}>
               <div className="step_second_text_plus_select">
-                <Text strong>Площадь объектов капитального строительства</Text>
+                <Text strong>
+                  Площадь объектов капитального строительства, м<sup>2</sup>
+                </Text>
                 <Input
                   onChange={handleChangeNumberObjects}
                   placeholder="Введите число в м2"
@@ -187,9 +191,11 @@ const StepSecond = ({
             </Col>
           </Row>
           <Row>
-            <Col span={16}>
+            <Col span={20}>
               <div className="step_second_text_plus_select">
-                <Text strong>Площадь подлежащих ремонту объектов</Text>
+                <Text strong>
+                  Площадь подлежащих ремонту объектов, м<sup>2</sup>
+                </Text>
                 <Input
                   onChange={handleChangeNumberRebuildObjects}
                   placeholder="Введите число в м2"
@@ -213,7 +219,9 @@ const StepSecond = ({
             <Col span={10}>
               <div className="step_second_text_input_plus_button">
                 <div className="step_second_text_plus_select">
-                  <Text strong>Площадь м2</Text>
+                  <Text strong>
+                    Площадь, м<sup>2</sup>
+                  </Text>
                   <Input
                     onChange={handleChangeSpecificObjectsCost}
                     maxLength={16}

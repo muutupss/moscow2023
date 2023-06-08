@@ -82,7 +82,9 @@ const LoginMain = observer(() => {
         </Text>
         <Form.Item
           name="email"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[
+            { required: true, message: 'Пожалуйста, введите вашу Почту' },
+          ]}
         >
           <Input />
         </Form.Item>
@@ -93,7 +95,9 @@ const LoginMain = observer(() => {
         </Text>
         <Form.Item
           name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[
+            { required: true, message: 'Пожалуйста, введите ваш Пароль' },
+          ]}
         >
           <Input.Password />
         </Form.Item>

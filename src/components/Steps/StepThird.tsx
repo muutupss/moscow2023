@@ -28,9 +28,7 @@ const StepThird = ({
       (value: any) => value.name === inputValue,
     );
     if (findItem && findItem?.price_rub) {
-      setvalueSpecificObjectsCost(
-        Math.trunc(parseInt(findItem?.price_rub) / 1000),
-      );
+      setvalueSpecificObjectsCost(parseInt(findItem?.price_rub));
       setvalueSpecificObjectsSum(1);
     }
   };
@@ -63,7 +61,7 @@ const StepThird = ({
     ) {
       changeCurrentStepValues('equipments', {
         name: valueSpecificObjects,
-        price_rub: valueSpecificObjectsCost * 1000,
+        price_rub: valueSpecificObjectsCost,
         count: valueSpecificObjectsSum,
       });
       setvalueSpecificObjects('');
@@ -100,11 +98,11 @@ const StepThird = ({
         <Col span={10}>
           <div className="step_second_text_input_plus_button">
             <div className="step_second_text_plus_select">
-              <Text strong>Цена в тыс. руб.</Text>
+              <Text strong>Цена в рублях</Text>
               <Input
                 onChange={handleChangeSpecificObjectsCost}
                 maxLength={16}
-                placeholder="300 тысяч"
+                placeholder="300 000"
                 value={valueSpecificObjectsCost ? valueSpecificObjectsCost : 0}
               />
             </div>

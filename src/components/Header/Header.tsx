@@ -14,10 +14,14 @@ import {
 const items: MenuProps['items'] = [
   {
     key: '1',
-    label: 'Мои отчеты',
+    label: 'Все отчеты',
   },
   {
     key: '2',
+    label: 'Мои данные',
+  },
+  {
+    key: '3',
     label: 'Выйти',
   },
 ];
@@ -26,7 +30,7 @@ const Header = observer(() => {
   let location = useLocation();
   const navigate = useNavigate();
   const { sharedStore } = useStore();
-  const { logout } = sharedStore;
+  const { logout, resetCurrentStepValues } = sharedStore;
 
   const handleClickRegistationButton = () => {
     navigate('/registration');
@@ -37,6 +41,7 @@ const Header = observer(() => {
   };
 
   const handleClickAppFormButton = () => {
+    resetCurrentStepValues();
     navigate('/');
   };
 
@@ -50,6 +55,8 @@ const Header = observer(() => {
         }
         break;
       case '2':
+        break;
+      case '3':
         logout();
         navigate('/');
         break;
