@@ -35,7 +35,7 @@ export default class SharedStore {
         type: 'spline'
     },
     title: {
-        text: 'График посещения пользователей'
+        text: 'Количество запросов на расчет вложений в день'
     },
     xAxis: {
         type: 'datetime',
@@ -74,7 +74,7 @@ export default class SharedStore {
     // at 0 for January, 1 for February etc.
     series: [
         {
-            name: 'Количество посещений',
+            name: 'Количество запросов',
             data: []
         }
     ]
@@ -369,7 +369,7 @@ export default class SharedStore {
       console.log('mapping', mapping)
       this.optionsForAdminChart = {...this.optionsForAdminChart, series: [
         {
-            name: 'Количество посещений',
+            name: 'Количество запросов',
             data: mapping
         }
     ]}

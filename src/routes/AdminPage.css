@@ -5,18 +5,6 @@
   box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.06);
 }
 
-/* CSS для контента (content) */
-.admin_page_content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  border-radius: 8px;
-  margin-bottom: 40px;
-  margin-top: 40px;
-  background-color: #FFFFFF;
-}
-
 .empty_block {
   min-height: 40px;
 }

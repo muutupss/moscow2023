@@ -8,6 +8,7 @@ import { useStore } from '../../hooks/use-store';
 import { isUserInSystemLocalStorage } from '../../helper/auth-header';
 import { useNavigate } from 'react-router-dom';
 import AdminChart from './AdminChart';
+import Title from 'antd/es/typography/Title';
 
 interface DataType {
   key: string;
@@ -63,7 +64,6 @@ const AdminMain = observer(() => {
     doesUserInSystem,
     listCurrentCalculators,
     industries,
-    statsCurrentCalculators,
     optionsForAdminChart,
   } = sharedStore;
 
@@ -108,11 +108,20 @@ const AdminMain = observer(() => {
 
   return (
     <>
-      <AdminChart optionsForChart={optionsForAdminChart} />
-      <Table
-        columns={columns}
-        dataSource={handleMappingList(listCurrentCalculators)}
-      />
+      <div className="admin_page_content">
+        <AdminChart optionsForChart={optionsForAdminChart} />
+      </div>
+      <div className="admin_page_content">
+        <div className="admin_page_title">
+          <Title style={{ margin: 0 }} level={4}>
+            Все запросы от пользователей
+          </Title>
+        </div>
+        <Table
+          columns={columns}
+          dataSource={handleMappingList(listCurrentCalculators)}
+        />
+      </div>
     </>
   );
 });

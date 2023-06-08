@@ -9,9 +9,7 @@ function AdminPage() {
       <div className="admin_page_header">
         <Header />
       </div>
-      <div className="admin_page_content">
-        <AdminMain />
-      </div>
+      <AdminMain />
       <div className="empty_block"></div>
     </div>
   );
