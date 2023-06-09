@@ -28,7 +28,9 @@ const StepThird = ({
       (value: any) => value.name === inputValue,
     );
     if (findItem && findItem?.price_rub) {
-      setvalueSpecificObjectsCost(parseInt(findItem?.price_rub));
+      setvalueSpecificObjectsCost(
+        Math.trunc(parseInt(findItem?.price_rub) / 100),
+      );
       setvalueSpecificObjectsSum(1);
     }
   };
