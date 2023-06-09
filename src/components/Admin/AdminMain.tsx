@@ -43,13 +43,16 @@ const columns: ColumnsType<DataType> = [
     dataIndex: 'ReportLink',
     key: 'ReportLink',
     render: (text) => {
-      return (
-        <Button danger>
-          <a href={text} target="_blank">
-            Скачать отчет
-          </a>
-        </Button>
-      );
+      if (text) {
+        return (
+          <Button danger>
+            <a href={text} target="_blank">
+              Скачать отчет
+            </a>
+          </Button>
+        );
+      }
+      return '';
     },
   },
 ];
